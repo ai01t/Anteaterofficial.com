@@ -457,7 +457,7 @@ UNIQUE CHARACTERISTICS:
                     <p className="mb-3">Follow us on social media</p>
                     <div className="flex gap-4 justify-center md:justify-start">
                       <a
-                        href="https://www.instagram.com/anteater_official"
+                        href="https://www.instagram.com/anteaterofficial"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-bold hover:opacity-60 transition"
