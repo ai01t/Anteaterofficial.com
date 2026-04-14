@@ -19,12 +19,9 @@ const ShowsSectionComponent = ({ events, loading }: ShowsSectionProps) => {
     <div className="mb-32 md:ml-auto md:mr-0 md:w-1/2 md:pr-12 w-full">
       <div className="relative">
         <div className="md:pl-8 pb-8">
-          <h2 className="text-4xl font-bold text-black mb-2 uppercase tracking-wide text-center md:text-left">
+          <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
             Upcoming Shows
           </h2>
-          <p className="text-sm italic text-black mb-6 text-center md:text-left">
-            Lots of shows coming in 2026 - dates to be revealed soon
-          </p>
           <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 text-base text-black">
             {loading ? (
               <div className="flex justify-center py-8">
