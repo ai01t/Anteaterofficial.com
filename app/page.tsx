@@ -405,14 +405,14 @@ UNIQUE CHARACTERISTICS:
         </div>
       </main>
 
-      <footer className="relative py-12 px-6">
+      <footer className="relative py-16 px-6 bg-black/90 mt-20">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-black">
+          <div className="flex flex-wrap justify-center gap-8 text-base font-semibold text-white uppercase tracking-wider">
             <a
               href="https://www.instagram.com/anteaterofficial/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-60 transition"
+              className="hover:text-gray-300 transition"
             >
               Instagram
             </a>
@@ -420,7 +420,7 @@ UNIQUE CHARACTERISTICS:
               href="https://www.facebook.com/anteaterofficial"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-60 transition"
+              className="hover:text-gray-300 transition"
             >
               Facebook
             </a>
@@ -428,7 +428,7 @@ UNIQUE CHARACTERISTICS:
               href="https://www.youtube.com/watch?v=UkekVsnQuaM&list=RDUkekVsnQuaM&start_radio=1"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-60 transition"
+              className="hover:text-gray-300 transition"
             >
               YouTube
             </a>
@@ -436,7 +436,7 @@ UNIQUE CHARACTERISTICS:
               href="https://open.spotify.com/artist/0ZNouScAQI1pQCLbWWJr3g"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-60 transition"
+              className="hover:text-gray-300 transition"
             >
               Spotify
             </a>
@@ -444,7 +444,7 @@ UNIQUE CHARACTERISTICS:
               href="https://music.apple.com/us/artist/anteater/1482398618"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-60 transition"
+              className="hover:text-gray-300 transition"
             >
               Apple Music
             </a>
