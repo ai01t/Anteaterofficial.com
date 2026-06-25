@@ -28,34 +28,41 @@ const ShowsSectionComponent = ({ events, loading }: ShowsSectionProps) => {
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
               </div>
             ) : events.length > 0 ? (
-              <div className="space-y-6">
-                {events.map((event, index) => (
-                  <a
-                    key={index}
-                    href={event.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block group border-b border-black/10 pb-4 last:border-0 last:pb-0 hover:opacity-70 transition"
-                  >
-                    <p className="text-xs text-black/60 mb-1">
-                      {new Date(event.datetime).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                    <p className="font-bold text-lg mb-1">
-                      {event.venue.city}, {event.venue.country}
-                    </p>
-                    <p className="text-sm">
-                      {event.venue.name}{" "}
-                      {event.lineup.length > 1
-                        ? `(with ${event.lineup.filter((a) => a !== "Anteater").join(", ")})`
-                        : ""}
-                    </p>
-                  </a>
-                ))}
-              </div>
+              (() => {
+                const compact = events.length > 3
+                return (
+                  <div className={compact ? "space-y-3" : "space-y-6"}>
+                    {events.map((event, index) => (
+                      <a
+                        key={index}
+                        href={event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`block group border-b border-black/10 last:border-0 last:pb-0 hover:opacity-70 transition ${
+                          compact ? "pb-2" : "pb-4"
+                        }`}
+                      >
+                        <p className={`text-xs text-black/60 ${compact ? "mb-0.5" : "mb-1"}`}>
+                          {new Date(event.datetime).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                        <p className={`font-bold ${compact ? "text-base mb-0.5" : "text-lg mb-1"}`}>
+                          {event.venue.city}, {event.venue.country}
+                        </p>
+                        <p className={compact ? "text-xs" : "text-sm"}>
+                          {event.venue.name}{" "}
+                          {event.lineup.length > 1
+                            ? `(with ${event.lineup.filter((a) => a !== "Anteater").join(", ")})`
+                            : ""}
+                        </p>
+                      </a>
+                    ))}
+                  </div>
+                )
+              })()
             ) : (
               <div className="text-center py-8">
                 <p className="text-black/60">Check back soon for new dates!</p>
