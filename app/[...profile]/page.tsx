@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { MemberProfile, type Locale } from "@/components/member-profile"
 
 const profileSlugs = ["andy", "hanzi", "jindra"]
-const profileNames: Record<string, string> = { andy: "Andrea Kohoutová", hanzi: "Jan Oršíček", jindra: "Jindřich Traxmandl" }
+const profileNames: Record<string, string> = { andy: "Andrea Kohoutová", hanzi: "Jan Oríšek", jindra: "Jindřich Traxmandl" }
 
 export function generateStaticParams() {
   return profileSlugs.flatMap((slug) => [slug, `${slug}/de`, `${slug}/cz`].map((path) => ({ profile: path.split("/") })))
