@@ -55,7 +55,7 @@ The band is known for stunning live performances, professional studio-grade equi
 MEMBERS:
 - Andrea Kohoutová: Lead vocals, bass guitar, guitar (frontwoman) - Degree in Archaeology (Charles University Prague), former lead in rock opera "Kladivo na Pýchu"
 - Jindřich Traxmandl: Guitar, bass, drums - Engineer, tech enthusiast, analog equipment specialist
-- Jan Oršek: Drums, percussion - Professional session and live drummer
+- Jan Oríšek: Drums, percussion - Professional session and live drummer
 
 GENRE & STYLE:
 Rock, Post-grunge, Alternative Rock, Stoner Rock, Modern Rock, Female-Fronted Rock, Metal-influenced
@@ -82,7 +82,7 @@ Studio: Universal Audio Apollo X8P, Logic Pro X
 Drums: Mapex Saturn, Zildjian K Cymbals, Remo Heads, Vic Firth 5B, Tama Iron Cobra
 
 MUSIC & RECORDINGS:
-FUEL (2024) - Music by Jindřich Traxmandl, Andrea Kohoutová, Jan Oršek. Lyrics by Andrea Kohoutová. Produced by Damián Kučera.
+FUEL (2024) - Music by Jindřich Traxmandl, Andrea Kohoutová, Jan Oríšek. Lyrics by Andrea Kohoutová. Produced by Damián Kučera.
 Video: https://www.youtube.com/watch?v=UkekVsnQuaM
 
 I Can Save You (2024) - Produced by Thom Fröde
