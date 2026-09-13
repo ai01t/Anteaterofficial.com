@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import type React from "react"
-import { ChevronDown, Music2 } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { useState } from "react"
 
 type Locale = "en" | "de" | "cz"
@@ -61,7 +61,6 @@ const displayOrder = ["andy", "jindra", "hanzi"]
 export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }) {
   const profile = profiles.find((item) => item.slug === slug) ?? profiles[0]
   const [bioOpen, setBioOpen] = useState(false)
-  const [gearOpen, setGearOpen] = useState(false)
 
   return (
     <main className="profile-page" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
@@ -76,17 +75,12 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
       </nav>
 
       <section className="profile-hero" aria-labelledby="profile-name">
-        <p className="eyebrow"><span className="eyebrow-line" /> ANTEATER / MUSICIAN</p>
         <h1 id="profile-name">{profile.name}</h1>
-        <p className="profile-role">{profile.role[locale]}</p>
       </section>
 
       <section className="profile-content" aria-label={`${profile.name} profile details`}>
         <Disclosure label={locale === "de" ? "BIOGRAFIE" : locale === "cz" ? "BIO" : "BIOGRAPHY"} open={bioOpen} onClick={() => setBioOpen(!bioOpen)}>
           <p>{profile.bio[locale]}</p>
-        </Disclosure>
-        <Disclosure label={locale === "de" ? "INSTRUMENTE" : locale === "cz" ? "NA CO HRAJE" : "PLAYS"} open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
-          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}><Music2 aria-hidden="true" /> {instrument}</li>)}</ul>
         </Disclosure>
       </section>
 
