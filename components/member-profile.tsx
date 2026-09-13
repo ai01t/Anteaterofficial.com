@@ -91,7 +91,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
       </section>
 
       <footer className="profile-footer">
-        <div><span className="footer-label">NEXT</span><Link href={`/${displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length]}`}>{profiles.find((item) => item.slug === displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length])?.name}</Link></div>
+        <div><span className="footer-label">NEXT</span><Link href={`/${displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length]}${locale === "en" ? "" : `/${locale}`}`}>{profiles.find((item) => item.slug === displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length])?.name}</Link></div>
         <Link href="/" className="back-link">Back to ANTEATER</Link>
       </footer>
     </main>
