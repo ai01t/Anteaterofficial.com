@@ -1,4 +1,4 @@
-.profile-page { --ink: #f3f0e9; --muted: #a9a69e; --acid: #d8ff36; position: relative; min-height: 100svh; overflow: hidden; color: var(--ink); background: #0c0d0b; font-family: 'Space Grotesk', sans-serif; isolation: isolate; }
+.profile-page { --ink: #f3f0e9; --muted: #a9a69e; --acid: #d8ff36; position: relative; min-height: 100svh; overflow: hidden; color: var(--ink); background: #0c0d0b; font-family: 'Poppins', sans-serif; isolation: isolate; }
 .profile-page::before { content: ''; position: fixed; inset: 0; z-index: -3; background-image: var(--profile-image); background-size: cover; background-position: center; filter: grayscale(.25) contrast(1.1); transform: scale(1.03); }
 .profile-overlay { position: fixed; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(5,6,5,.95) 0%, rgba(5,6,5,.72) 46%, rgba(5,6,5,.32) 100%), linear-gradient(0deg, #050605 0%, transparent 48%, rgba(5,6,5,.45) 100%); }
 .profile-nav { display: flex; justify-content: space-between; align-items: center; padding: 28px clamp(24px, 5vw, 76px); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }

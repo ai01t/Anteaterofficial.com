@@ -2,7 +2,10 @@ import type React from "react"
 import type { Metadata } from "next"
 
 import { Analytics } from "@vercel/analytics/next"
+import { Poppins } from "next/font/google"
 import "./globals.css"
+
+const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "ANTEATER - Female-Fronted Rock Band | Prague | Alternative Rock",
@@ -214,7 +217,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://open.spotify.com" />
         <link rel="preconnect" href="https://music.apple.com" />
       </head>
-      <body className={`font-sans antialiased`}>
+      <body className={`${poppins.className} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

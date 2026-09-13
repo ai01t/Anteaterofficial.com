@@ -253,7 +253,11 @@ UNIQUE CHARACTERISTICS:
                       </a>{" "}
                       reached #1 on Rock Zone Radio charts (Czech Republic)
                     </p>
-                    <p>UK Tours 2022-2023</p>
+                    <p className="mb-3">UK Tours 2022-2023</p>
+                    <p>
+                      In 2026, the band is building its own unique studio in a historic 17th-century property: the old water mill at{" "}
+                      <a href="https://mlynnapile.cz" target="_blank" rel="noopener noreferrer" className="font-bold hover:opacity-60 transition no-underline">mlynnapile.cz</a>. The main studio will also be open to the public.
+                    </p>
                   </div>
                 </div>
               </div>
