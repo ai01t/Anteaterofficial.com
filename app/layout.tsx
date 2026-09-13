@@ -210,14 +210,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-        {/* Preconnect to CDNs for performance */}
-        <link rel="preconnect" href="https://widgetv3.bandsintown.com" />
-        <link rel="preconnect" href="https://open.spotify.com" />
-        <link rel="preconnect" href="https://music.apple.com" />
-      </head>
       <body className={`${poppins.className} font-sans antialiased`}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         {children}
         <Analytics />
       </body>
