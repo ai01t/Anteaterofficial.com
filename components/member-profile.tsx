@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import type React from "react"
-import { ChevronDown, MapPin, Music2 } from "lucide-react"
+import { ChevronDown, Music2 } from "lucide-react"
 import { useState } from "react"
 
 type Locale = "en" | "de" | "cz"
@@ -77,13 +77,11 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
 
       <section className="profile-hero" aria-labelledby="profile-name">
         <p className="eyebrow"><span className="eyebrow-line" /> ANTEATER / MUSICIAN</p>
-        <p className="profile-index">0{displayOrder.indexOf(profile.slug) + 1} / 03</p>
         <h1 id="profile-name">{profile.name}</h1>
         <p className="profile-role">{profile.role[locale]}</p>
       </section>
 
       <section className="profile-content" aria-label={`${profile.name} profile details`}>
-        <div className="profile-intro"><MapPin aria-hidden="true" /> Prague, Czech Republic <span>·</span> Est. 2018</div>
         <Disclosure label={locale === "de" ? "BIOGRAFIE" : locale === "cz" ? "BIO" : "BIOGRAPHY"} open={bioOpen} onClick={() => setBioOpen(!bioOpen)}>
           <p>{profile.bio[locale]}</p>
         </Disclosure>
