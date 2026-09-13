@@ -25,7 +25,7 @@ const profiles: Profile[] = [
     bio: {
       en: "Andrea is the voice and frontwoman of ANTEATER. Her performance moves between intimate, melodic passages and a raw rock edge. Alongside music, she studied archaeology at Charles University in Prague and brings a curious, story-driven perspective to the band’s work.",
       de: "Andrea ist die Stimme und Frontfrau von ANTEATER. Ihr Auftritt bewegt sich zwischen intimen, melodischen Momenten und einer rauen Rockkante. Neben der Musik studierte sie Archäologie an der Karls-Universität in Prag und bringt eine neugierige, erzählerische Perspektive in die Arbeit der Band ein.",
-      cz: "Andrea je frontwoman, zpěvačka, baskytaristka a skladatelka. Miluje přírodu, jógu, běh a historii. Pochází z Klatov, vystudovala historii a působila ve Vlastivědném muzeu Dr. Hostaše. Účinkovala také v muzikálu Kladivo na Pýchu. Do alternativního rocku a grunge přináší sílu, zranitelnost a vlastní tvůrčí cestu.",
+      cz: "Andrea – naše frontwoman, zpěvačka, basačka, skladatelka a mimo kapelu nadšenec do historie – je milovnice přírody, cvičí jógu a ráda běhá. Žije na mlýně, kde peče chléb a s láskou se stará o naši partu slepic. Andrea je od dětství mimořádně kreativní člověk. Ráda malovala, četla o dinosaurech i historii a získala titul Mgr. na Západočeské univerzitě. Pochází z Klatov, několik let strávila ve Vlastivědném muzeu Dr. Hostaše a účinkovala v muzikálu Kladivo Na Pýchu, kde měla hlavní roli. Jako frontwoman a baskytaristka ANTEATER se pohybuje ve světě alternativního rocku a grunge s výrazným vlivem hudby devadesátých let. Do hudby přináší kombinaci síly a zranitelnosti.",
     },
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Andrea%20Kohoutova%CC%81-MrX42xWio3DPp9kWH11wJmU0WoLzCC.jpeg",
   },
@@ -37,7 +37,7 @@ const profiles: Profile[] = [
     bio: {
       en: "Jan Oríšek is a live and session drummer known for a precise pulse, dynamic control and a powerful stage presence. His playing gives ANTEATER’s songs their physical drive while leaving space for the arrangement to breathe.",
       de: "Jan Oríšek ist Live- und Sessiondrummer, bekannt für präzises Timing, dynamische Kontrolle und eine starke Bühnenpräsenz. Sein Spiel gibt den Songs von ANTEATER den körperlichen Antrieb und lässt dem Arrangement zugleich Raum zum Atmen.",
-      cz: "Jan Oríšek kryje kapele záda pevným rytmem a jistotou na každém koncertě. Na housle a klavír začal hrát v šesti letech, dnes hraje především na bicí, ale také na kytaru, baskytaru a klavír. Ovládá i samply používané živě. Když zrovna nesedí za bicími, věnuje se enduru, freeridu, trailům, snowboardu, boulderingu, horám a cestování.",
+      cz: "S Honzou nám kryje záda a díky němu si můžeme být jistí na každém koncertě. Honza drží pevně rytmus a za celou dobu existence kapely se nestala chyba, která by ohrozila koncert. Díky zkušenostem z dalších nástrojů dokážeme improvizovat ve studiu i na koncertě, i když praskne struna. S nástroji začínal v šesti letech na housle a klavír. Dnes hraje převážně na bicí, ale také na kytaru, baskytaru a stále na klavír. Ovládá samply používané živě. Když zrovna nesedí za bicími, věnuje se enduru, freeridu, trailům, snowboardu, longboardu, boulderingu, horám, trekování, cestování a festivalům. Aktuálně žije v Praze, odkud vyráží za kapelou na zkoušky do mlýna a na koncerty.",
     },
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jan%20Ori%CC%81s%CC%8Cek-RQnKevx7WuXrGXDuYekLRggoaQ8MHG.jpeg",
   },
@@ -61,6 +61,7 @@ const displayOrder = ["andy", "jindra", "hanzi"]
 export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }) {
   const profile = profiles.find((item) => item.slug === slug) ?? profiles[0]
   const [bioOpen, setBioOpen] = useState(false)
+  const [gearOpen, setGearOpen] = useState(false)
 
   return (
     <main className="profile-page" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
@@ -81,6 +82,9 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
       <section className="profile-content" aria-label={`${profile.name} profile details`}>
         <Disclosure label={locale === "de" ? "BIOGRAFIE" : locale === "cz" ? "BIO" : "BIOGRAPHY"} open={bioOpen} onClick={() => setBioOpen(!bioOpen)}>
           <p>{profile.bio[locale]}</p>
+        </Disclosure>
+        <Disclosure label={locale === "de" ? "GEAR / INSTRUMENTE" : locale === "cz" ? "GEAR / NA CO HRAJE" : "GEAR / WHAT THEY PLAY"} open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
+          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}>{instrument}</li>)}</ul>
         </Disclosure>
       </section>
 
