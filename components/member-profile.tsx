@@ -86,7 +86,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
           </div>
         </Disclosure>
         <Disclosure label={locale === "de" ? "GEAR / INSTRUMENTE" : locale === "cz" ? "GEAR / NA CO HRAJE" : "GEAR / WHAT THEY PLAY"} open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
-          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}>{instrument}{instrument.startsWith("Fuel I Can Save You") && <> · <a href="https://www.youtube.com/watch?v=UkekVsnQuaM&list=RDUkekVsnQuaM&start_radio=1" target="_blank" rel="noopener noreferrer">YouTube — Fuel</a></>}{instrument.startsWith("I Can Save You") && <> · <a href="https://www.youtube.com/results?search_query=ANTEATER+I+Can+Save+You" target="_blank" rel="noopener noreferrer">YouTube — I Can Save You</a></>}</li>)}</ul>
+          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}>{instrument}{instrument.startsWith("Fuel I Can Save You") && <> · <a href="https://www.youtube.com/watch?v=UkekVsnQuaM&list=RDUkekVsnQuaM&start_radio=1" target="_blank" rel="noopener noreferrer">YouTube — Fuel</a></>}{instrument.startsWith("I Can Save You") && <> · <a href="https://www.youtube.com/watch?v=DOtJ7jTPxOQ&list=RDDOtJ7jTPxOQ&start_radio=1" target="_blank" rel="noopener noreferrer">YouTube — I Can Save You</a></>}</li>)}</ul>
         </Disclosure>
       </section>
 
