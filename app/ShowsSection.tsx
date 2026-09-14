@@ -23,6 +23,7 @@ const ShowsSectionComponent = ({ events, loading }: ShowsSectionProps) => {
             Upcoming Shows
           </h2>
           <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 text-base text-black">
+            <p className="mb-5 text-lg font-bold">Autumn Tour with Cocotte Minute</p>
             {loading ? (
               <div className="flex justify-center py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>

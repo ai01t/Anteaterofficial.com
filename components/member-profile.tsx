@@ -60,7 +60,7 @@ const displayOrder = ["andy", "jindra", "hanzi"]
 
 export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }) {
   const profile = profiles.find((item) => item.slug === slug) ?? profiles[0]
-  const [bioOpen, setBioOpen] = useState(false)
+  const [bioOpen, setBioOpen] = useState(true)
   const [gearOpen, setGearOpen] = useState(false)
 
   return (
