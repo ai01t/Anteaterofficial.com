@@ -117,10 +117,12 @@ function isSong(instrument: string) {
 
 function renderInstrument(instrument: string) {
   const displayInstrument = instrument
-    .replace("Olšové tělo, ", "")
-    .replace(", sedla místo originálních ocelových", "")
+    .replace(/alder body,?\s*/gi, "")
+    .replace(/olšové tělo,?\s*/gi, "")
+    .replace(/,?\s*saddles instead of the original steel ones\.?/gi, "")
+    .replace(/,?\s*sedla místo originálních ocelových\.?/gi, "")
     .replace("Fender ’64 Custom Deluxe Reverb, 20W hand-wired combo s Jensenem C12K.", "Fender ’64 Custom Deluxe Reverb, 20W hand-wired combo with Jensen C12K. Usually combined with Fender Custom Shop – Jeff Beck or Fender Custom Shop LTD ’67 HSS Strat AB HR (+ D&M Drive distortion)")
-    .replace("Stowattová hlava se dvěma módy (AFD a #34, Slashův upravený JCM800), 4× 12\\\" Celestion G12T-75 v bedně.", "")
+    .replace(/Stowattová hlava se dvěma módy \(AFD a #34, Slashův upravený JCM800\), 4× 12\\?" Celestion G12T-75 v bedně\.?/gi, "")
   if (displayInstrument === "LIVE" || displayInstrument === "Studio") return <span className="gear-heading">{displayInstrument}</span>
 
   const links = [
