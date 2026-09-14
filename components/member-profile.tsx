@@ -67,7 +67,11 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
     <main className="profile-page" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
       <div className="profile-overlay" />
       <nav className="profile-nav" aria-label="Profile navigation">
-        <Link href="/" className="wordmark">ANTEATER<span> / PROFILE</span></Link>
+        <div className="profile-breadcrumb" aria-label="Profile breadcrumb">
+          <Link href="/" className="wordmark">ANTEATER<span> / PROFILE</span></Link>
+          <span className="breadcrumb-separator">/</span>
+          <Link href={`/${profile.slug}${locale === "en" ? "" : `/${locale}`}`} className="breadcrumb-current">{profile.slug.toUpperCase()}</Link>
+        </div>
         <div className="language-switcher" aria-label="Language switcher">
           {(Object.keys(localeLabels) as Locale[]).map((item) => (
             <Link key={item} href={`/${profile.slug}${item === "en" ? "" : `/${item}`}`} className={item === locale ? "active" : ""}>{localeLabels[item]}</Link>
@@ -91,7 +95,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
       </section>
 
       <footer className="profile-footer">
-        <div><span className="footer-label">NEXT</span><Link href={`/${displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length]}${locale === "en" ? "" : `/${locale}`}`}>{profiles.find((item) => item.slug === displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length])?.name}</Link></div>
+        <Link className="next-profile" href={`/${displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length]}${locale === "en" ? "" : `/${locale}`}`}><span className="footer-label">NEXT</span><span>{profiles.find((item) => item.slug === displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length])?.name}</span></Link>
         <Link href="/" className="back-link">Back to ANTEATER</Link>
       </footer>
     </main>
