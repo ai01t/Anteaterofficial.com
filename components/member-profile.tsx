@@ -114,11 +114,13 @@ function renderInstrument(instrument: string) {
     ["Fuel —", "https://www.youtube.com/watch?v=UkekVsnQuaM&list=RDUkekVsnQuaM&start_radio=1"],
     ["Fuel signal chain —", "https://www.youtube.com/watch?v=UkekVsnQuaM&list=RDUkekVsnQuaM&start_radio=1"],
     ["I Can Save You —", "https://www.youtube.com/watch?v=DOtJ7jTPxOQ&list=RDDOtJ7jTPxOQ&start_radio=1"],
+    ["Hope intro —", "https://www.youtube.com/watch?v=AtiC-fuJAgk"],
   ] as const
   const match = links.find(([label]) => instrument.startsWith(label))
   if (!match) return instrument
   const [label, href] = match
-  return <><a href={href} target="_blank" rel="noopener noreferrer">{label.replace(" —", "")}</a>{instrument.slice(label.length - 1)}</>
+  const linkLabel = label === "Hope intro —" ? "Hope" : label.replace(" —", "")
+  return <><a href={href} target="_blank" rel="noopener noreferrer">{linkLabel}</a>{instrument.slice(label.length - 1)}</>
 }
 
 function formatBio(text: string) {
