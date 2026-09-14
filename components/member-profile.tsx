@@ -97,7 +97,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
           </div>
         </Disclosure>
         <Disclosure label={locale === "de" ? "GEAR / INSTRUMENTE" : locale === "cz" ? "GEAR / NA CO HRAJE" : "GEAR / WHAT THEY PLAY"} open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
-          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}>{renderInstrument(instrument)}</li>)}</ul>
+          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument} className={instrument.startsWith("Wireless") || instrument.startsWith("Bezdrát") ? "gear-wireless" : instrument.startsWith("Cables") || instrument.startsWith("Kabely") ? "gear-cables" : undefined}>{renderInstrument(instrument)}</li>)}</ul>
           {(locale === "cz" && (profile.slug === "andy" || profile.slug === "jindra")) && <p className="gear-studio-note"><strong>Komplet gear</strong> je dostupný ve studiu <a href="https://www.mlynnapile.cz" target="_blank" rel="noopener noreferrer"><strong>www.mlynnapile.cz</strong></a>. Seznam kompletního vybavení najdete <a href="https://www.mlynnapile.cz/#equipment" target="_blank" rel="noopener noreferrer">zde</a>.</p>}
   </Disclosure>
       </section>
