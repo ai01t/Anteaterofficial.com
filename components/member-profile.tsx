@@ -62,6 +62,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
   const profile = profiles.find((item) => item.slug === slug) ?? profiles[0]
   const [bioOpen, setBioOpen] = useState(true)
   const [gearOpen, setGearOpen] = useState(false)
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false)
 
   return (
     <main className="profile-page" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
@@ -70,7 +71,13 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
         <div className="profile-breadcrumb" aria-label="Profile breadcrumb">
           <Link href="/" className="wordmark">ANTEATER<span> / PROFILE</span></Link>
           <span className="breadcrumb-separator">/</span>
-          <Link href={`/${profile.slug}${locale === "en" ? "" : `/${locale}`}`} className="breadcrumb-current">{profile.slug.toUpperCase()}</Link>
+          <div className="profile-picker">
+            <button type="button" className="breadcrumb-current" aria-expanded={profileMenuOpen} aria-controls="profile-menu" onClick={() => setProfileMenuOpen(!profileMenuOpen)}>{profile.slug.toUpperCase()}</button>
+            {profileMenuOpen && <div id="profile-menu" className="profile-menu">{displayOrder.filter((slug) => slug !== profile.slug).map((slug) => {
+              const item = profiles.find((candidate) => candidate.slug === slug)
+              return item ? <Link key={slug} href={`/${slug}${locale === "en" ? "" : `/${locale}`}`} onClick={() => setProfileMenuOpen(false)}>{item.name}</Link> : null
+            })}</div>}
+          </div>
         </div>
         <div className="language-switcher" aria-label="Language switcher">
           {(Object.keys(localeLabels) as Locale[]).map((item) => (
