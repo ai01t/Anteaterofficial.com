@@ -116,7 +116,12 @@ function isSong(instrument: string) {
 }
 
 function renderInstrument(instrument: string) {
-  if (instrument === "LIVE" || instrument === "Studio") return <span className="gear-heading">{instrument}</span>
+  const displayInstrument = instrument
+    .replace("Olšové tělo, ", "")
+    .replace(", sedla místo originálních ocelových", "")
+    .replace("Fender ’64 Custom Deluxe Reverb, 20W hand-wired combo s Jensenem C12K.", "Fender ’64 Custom Deluxe Reverb, 20W hand-wired combo with Jensen C12K. Usually combined with Fender Custom Shop – Jeff Beck or Fender Custom Shop LTD ’67 HSS Strat AB HR (+ D&M Drive distortion)")
+    .replace("Stowattová hlava se dvěma módy (AFD a #34, Slashův upravený JCM800), 4× 12\\\" Celestion G12T-75 v bedně.", "")
+  if (displayInstrument === "LIVE" || displayInstrument === "Studio") return <span className="gear-heading">{displayInstrument}</span>
 
   const links = [
     ["Fuel —", "https://www.youtube.com/watch?v=UkekVsnQuaM&list=RDUkekVsnQuaM&start_radio=1"],
@@ -125,11 +130,11 @@ function renderInstrument(instrument: string) {
     ["Hope intro —", "https://www.youtube.com/watch?v=AtiC-fuJAgk"],
     ["Hope —", "https://www.youtube.com/watch?v=AtiC-fuJAgk"],
   ] as const
-  const match = links.find(([label]) => instrument.startsWith(label))
-  if (!match) return instrument
+  const match = links.find(([label]) => displayInstrument.startsWith(label))
+  if (!match) return displayInstrument
   const [label, href] = match
   const linkLabel = label === "Hope intro —" ? "Hope" : label.replace(" —", "")
-  return <><a href={href} target="_blank" rel="noopener noreferrer">{linkLabel}</a>{instrument.slice(label.length - 1)}</>
+  return <><a href={href} target="_blank" rel="noopener noreferrer">{linkLabel}</a>{displayInstrument.slice(label.length - 1)}</>
 }
 
 function formatBio(text: string) {
