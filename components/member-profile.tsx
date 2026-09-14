@@ -97,8 +97,9 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
           </div>
         </Disclosure>
         <Disclosure label={locale === "de" ? "GEAR / INSTRUMENTE" : locale === "cz" ? "GEAR / NA CO HRAJE" : "GEAR / WHAT THEY PLAY"} open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
-          <ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}>{renderInstrument(instrument)}</li>)}</ul>
-        </Disclosure>
+<ul className="instrument-list">{profile.instruments[locale].map((instrument) => <li key={instrument}>{renderInstrument(instrument)}</li>)}</ul>
+          {(locale === "cz" && (profile.slug === "andy" || profile.slug === "jindra")) && <p className="gear-studio-note">Komplet gear je dostupný ve studiu <a href="https://www.mlynnapile.cz" target="_blank" rel="noopener noreferrer">www.mlynnapile.cz</a>. Seznam kompletního vybavení najdete <a href="https://www.mlynnapile.cz/#equipment" target="_blank" rel="noopener noreferrer">zde</a>.</p>}
+  </Disclosure>
       </section>
 
       <footer className="profile-footer">
