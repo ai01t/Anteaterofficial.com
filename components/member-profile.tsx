@@ -75,7 +75,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
             <button type="button" className="breadcrumb-current" aria-expanded={profileMenuOpen} aria-controls="profile-menu" onClick={() => setProfileMenuOpen(!profileMenuOpen)}>{profile.slug.toUpperCase()}</button>
             {profileMenuOpen && <div id="profile-menu" className="profile-menu">{displayOrder.filter((slug) => slug !== profile.slug).map((slug) => {
               const item = profiles.find((candidate) => candidate.slug === slug)
-              return item ? <Link key={slug} href={`/${slug}${locale === "en" ? "" : `/${locale}`}`} onClick={() => setProfileMenuOpen(false)}>{item.name}</Link> : null
+              return item ? <Link key={slug} href={`/${slug}${locale === "en" ? "" : `/${locale}`}`} onClick={() => setProfileMenuOpen(false)}>/ {slug.toUpperCase()}</Link> : null
             })}</div>}
           </div>
         </div>
