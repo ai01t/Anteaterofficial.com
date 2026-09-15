@@ -20,6 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ profile: 
 
 export default async function ProfilePage({ params }: { params: Promise<{ profile: string[] }> }) {
   const { profile: segments } = await params
-  if (segments.length === 1) redirect(`/${segments[0]}/cz`)
+  if (segments.length !== 2 || segments[1] !== "cz") redirect(`/${segments[0]}/cz`)
   return <MemberProfile slug={segments[0]} locale="cz" />
 }
