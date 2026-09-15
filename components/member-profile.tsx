@@ -64,7 +64,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
 
   return (
-    <main className="profile-page" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
+    <main className="profile-page" data-locale="cz" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
       <div className="profile-overlay" />
       <nav className="profile-nav" aria-label="Profile navigation">
         <div className="profile-breadcrumb" aria-label="Profile breadcrumb">
