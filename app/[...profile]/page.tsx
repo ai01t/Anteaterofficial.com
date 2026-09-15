@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
 import { MemberProfile } from "@/components/member-profile"
 
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+
 const profileSlugs = ["andy", "hanzi", "jindra"]
 const profileNames: Record<string, string> = { andy: "Andrea Kohoutová", hanzi: "Jan Oríšek", jindra: "Jindřich Traxmandl" }
 
