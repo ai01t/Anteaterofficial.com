@@ -55,7 +55,6 @@ const profiles: Profile[] = [
   },
 ]
 
-const localeLabels: Record<Locale, string> = { en: "EN", de: "DE", cz: "CZ" }
 const displayOrder = ["andy", "jindra", "hanzi"]
 
 export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }) {
@@ -75,14 +74,9 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
             <button type="button" className="breadcrumb-current" aria-expanded={profileMenuOpen} aria-controls="profile-menu" onClick={() => setProfileMenuOpen(!profileMenuOpen)}>{profile.slug.toUpperCase()}</button>
             {profileMenuOpen && <div id="profile-menu" className="profile-menu">{displayOrder.filter((slug) => slug !== profile.slug).map((slug) => {
               const item = profiles.find((candidate) => candidate.slug === slug)
-              return item ? <Link key={slug} href={`/${slug}${locale === "en" ? "" : `/${locale}`}`} onClick={() => setProfileMenuOpen(false)}>/ {slug.toUpperCase()}</Link> : null
+              return item ? <Link key={slug} href={`/${slug}/cz`} onClick={() => setProfileMenuOpen(false)}>/ {slug.toUpperCase()}</Link> : null
             })}</div>}
           </div>
-        </div>
-        <div className="language-switcher" aria-label="Language switcher">
-          {(Object.keys(localeLabels) as Locale[]).map((item) => (
-            <Link key={item} href={`/${profile.slug}${item === "en" ? "" : `/${item}`}`} className={item === locale ? "active" : ""}>{localeLabels[item]}</Link>
-          ))}
         </div>
       </nav>
 
@@ -105,7 +99,7 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
       </section>
 
       <footer className="profile-footer">
-        <Link className="next-profile" href={`/${displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length]}${locale === "en" ? "" : `/${locale}`}`}><span className="footer-label">NEXT</span><span>{profiles.find((item) => item.slug === displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length])?.name}</span></Link>
+        <Link className="next-profile" href={`/${displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length]}/cz`}><span className="footer-label">NEXT</span><span>{profiles.find((item) => item.slug === displayOrder[(displayOrder.indexOf(profile.slug) + 1) % displayOrder.length])?.name}</span></Link>
         <Link href="/" className="back-link">Back to ANTEATER</Link>
       </footer>
     </main>
