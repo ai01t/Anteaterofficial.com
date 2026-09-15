@@ -57,14 +57,14 @@ const profiles: Profile[] = [
 
 const displayOrder = ["andy", "jindra", "hanzi"]
 
-export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }) {
+export function MemberProfile({ slug }: { slug: string }) {
   const profile = profiles.find((item) => item.slug === slug) ?? profiles[0]
   const [bioOpen, setBioOpen] = useState(true)
   const [gearOpen, setGearOpen] = useState(false)
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
 
   return (
-    <main className="profile-page" data-locale="cz" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
+    <main className="profile-page" style={{ "--profile-image": `url(${profile.image})` } as React.CSSProperties}>
       <div className="profile-overlay" />
       <nav className="profile-nav" aria-label="Profile navigation">
         <div className="profile-breadcrumb" aria-label="Profile breadcrumb">
@@ -85,16 +85,16 @@ export function MemberProfile({ slug, locale }: { slug: string; locale: Locale }
       </section>
 
       <section className="profile-content" aria-label={`${profile.name} profile details`}>
-        <Disclosure label={locale === "de" ? "BIOGRAFIE" : locale === "cz" ? "BIO" : "BIOGRAPHY"} open={bioOpen} onClick={() => setBioOpen(!bioOpen)}>
+        <Disclosure label="BIO" open={bioOpen} onClick={() => setBioOpen(!bioOpen)}>
           <div className="bio-copy">
-            {formatBio(profile.bio[locale]).map((paragraph, index) => <p key={`${profile.slug}-bio-${index}`}>{paragraph}</p>)}
+            {formatBio(profile.bio.cz).map((paragraph, index) => <p key={`${profile.slug}-bio-${index}`}>{paragraph}</p>)}
           </div>
         </Disclosure>
-        <Disclosure label={locale === "de" ? "GEAR / INSTRUMENTE" : locale === "cz" ? "GEAR / NA CO HRAJE" : "GEAR / WHAT THEY PLAY"} open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
-          <ul className="instrument-list">{profile.instruments[locale].filter((instrument) => !isSong(instrument)).map((instrument) => <li key={instrument} className={instrument.includes("GLXD16") ? "gear-wireless" : instrument.includes("Mogami Platinum") ? "gear-cables" : undefined}>{renderInstrument(instrument)}</li>)}</ul>
-          {locale === "cz" && profile.slug !== "andy" && profile.slug !== "hanzi" && <p className="gear-heading song-heading" style={{ marginTop: 32 }}>Studio / Live Signal Chain</p>}
-          <ul className="instrument-list instrument-songs">{profile.instruments[locale].filter(isSong).map((instrument) => <li key={instrument}>{renderInstrument(instrument)}</li>)}</ul>
-          {(locale === "cz" && (profile.slug === "andy" || profile.slug === "jindra")) && <p className="gear-studio-note"><strong>Komplet gear</strong> je dostupný ve studiu <a href="https://www.mlynnapile.cz" target="_blank" rel="noopener noreferrer"><strong>www.mlynnapile.cz</strong></a>. Seznam kompletního vybavení najdete <a href="https://www.mlynnapile.cz/#equipment" target="_blank" rel="noopener noreferrer">zde</a>.</p>}
+        <Disclosure label="GEAR / NA CO HRAJE" open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
+          <ul className="instrument-list">{profile.instruments.cz.filter((instrument) => !isSong(instrument)).map((instrument) => <li key={instrument} className={instrument.includes("GLXD16") ? "gear-wireless" : instrument.includes("Mogami Platinum") ? "gear-cables" : undefined}>{renderInstrument(instrument)}</li>)}</ul>
+          {profile.slug !== "andy" && profile.slug !== "hanzi" && <p className="gear-heading song-heading" style={{ marginTop: 32 }}>Studio / Live Signal Chain</p>}
+          <ul className="instrument-list instrument-songs">{profile.instruments.cz.filter(isSong).map((instrument) => <li key={instrument}>{renderInstrument(instrument)}</li>)}</ul>
+          {(profile.slug === "andy" || profile.slug === "jindra") && <p className="gear-studio-note"><strong>Komplet gear</strong> je dostupný ve studiu <a href="https://www.mlynnapile.cz" target="_blank" rel="noopener noreferrer"><strong>www.mlynnapile.cz</strong></a>. Seznam kompletního vybavení najdete <a href="https://www.mlynnapile.cz/#equipment" target="_blank" rel="noopener noreferrer">zde</a>.</p>}
   </Disclosure>
       </section>
 
