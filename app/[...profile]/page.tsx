@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 import { MemberProfile } from "@/components/member-profile"
 
 export const dynamic = "force-dynamic"
@@ -20,6 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ profile: 
 
 export default async function ProfilePage({ params }: { params: Promise<{ profile: string[] }> }) {
   const { profile: segments } = await params
-  if (segments.length !== 2 || segments[1] !== "cz") redirect(`/${segments[0]}/cz`)
+  if (!profileSlugs.includes(segments[0]) || segments.length !== 2 || segments[1] !== "cz") notFound()
   return <MemberProfile slug={segments[0]} locale="cz" />
 }
