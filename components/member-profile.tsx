@@ -87,7 +87,7 @@ export function MemberProfile({ slug }: { slug: string }) {
       <section className="profile-content" aria-label={`${profile.name} profile details`}>
         <Disclosure label="BIO" open={bioOpen} onClick={() => setBioOpen(!bioOpen)}>
           <div className="bio-copy">
-            {formatBio(profile.bio.cz).map((paragraph, index) => <p key={`${profile.slug}-bio-${index}`}>{paragraph}</p>)}
+            {formatBio(profile.bio?.cz).map((paragraph, index) => <p key={`${profile.slug}-bio-${index}`}>{paragraph}</p>)}
           </div>
         </Disclosure>
         <Disclosure label="GEAR / NA CO HRAJE" open={gearOpen} onClick={() => setGearOpen(!gearOpen)}>
@@ -131,7 +131,9 @@ function renderInstrument(instrument: string) {
   return <><a href={href} target="_blank" rel="noopener noreferrer">{linkLabel}</a>{displayInstrument.slice(label.length - 1)}</>
 }
 
-function formatBio(text: string) {
+function formatBio(text?: string) {
+  if (!text?.trim()) return []
+
   const blocks = text.split(/\n\n+/)
   if (blocks.length > 1) return blocks
 
