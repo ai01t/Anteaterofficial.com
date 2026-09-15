@@ -49,7 +49,7 @@ const profiles: Profile[] = [
     bio: {
       en: "Jindřich is a multi-instrumentalist, engineer and the band’s technical mind. In 2026 he is building his own unique studio: a creative hub where new material is taking shape. Housed in a historic 17th-century property, the main studio inside the old water mill will also be open to the public. More information is available from the band.",
       de: "Jindřich ist Multiinstrumentalist, Tontechniker und der technische Kopf der Band. 2026 baut er sein eigenes, einzigartiges Studio auf – einen kreativen Ort, an dem neues Material entsteht. Das Hauptstudio befindet sich in einem historischen Gebäude aus dem 17. Jahrhundert, einer alten Wassermühle, und wird auch der Öffentlichkeit offenstehen. Weitere Informationen gibt die Band bekannt.",
-      cz: "Jindřich Traxmandl je multiinstrumentalista, technik a technická hlava kapely. Naživo hraje na kytaru a používá precizně sestavený aparát Fender, Marshall a další studiovou techniku. Ve studiu pracuje s rozsáhlou sbírkou kytar, zesilovačů a efektů podle potřeb skladby. V roce 2026 buduje vlastní kreativní studio, kde vzniká nový materiál.",
+      cz: "Jindřich Traxmandl hraje na kytaru, ale pro Anteater nahrával i basu a trochu hraje na bicí. Jindra má rád moderní technologie, ale v hudbě preferuje staré aparáty a vintage nástroje. V roce 2026 buduje vlastní kreativní studio, kde vzniká nový materiál.",
     },
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jindr%CC%8Cich%20Traxmandl-sAHyNHo50VgJDdgLfcq8Kk3fRrriyp.jpeg",
   },
