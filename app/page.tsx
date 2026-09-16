@@ -141,8 +141,8 @@ export default function Home() {
                   <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
                     About
                   </h2>
-                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 text-base text-black text-center md:text-left">
-                    <p className="mb-3">Est. 2018, Prague</p>
+<div suppressHydrationWarning className="bg-white/5 backdrop-blur-md rounded-lg p-6 text-base text-black text-center md:text-left">
+  <p className="mb-3">Est. 2018, Prague</p>
                     <p className="mb-3">7 years active, extensive live experience</p>
                     <p className="mb-3">Performed in Germany and England</p>
                     <p className="mb-3">1st place at Múza 2019 and Strahov Show Band Contest 2019</p>
