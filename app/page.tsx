@@ -159,7 +159,7 @@ export default function Home() {
                       reached #1 on Rock Zone Radio charts (Czech Republic)
                     </p>
                     <p className="mb-3">UK Tours 2022-2023</p>
-                    <p>
+                    <p suppressHydrationWarning>
                       <strong>2026</strong> The band is building its own unique studio—a creative hub where new material is currently in the works. Housed in a historic property dating back to the 17th century, the main studio space inside the old water mill will also be open to the public. For more information, visit{" "}
                       <a href="https://mlynnapile.cz" target="_blank" rel="noopener noreferrer" className="font-bold hover:opacity-60 transition no-underline">mlynnapile.cz</a>.
                     </p>
