@@ -46,7 +46,7 @@ export default function Home() {
   const headerOpacity = Math.min(scrollY / 200, 0.7)
 
   return (
-    <div className="relative min-h-screen">
+    <div suppressHydrationWarning className="relative min-h-screen">
       <div
         className="fixed inset-0 -z-10 bg-no-repeat"
         style={{
