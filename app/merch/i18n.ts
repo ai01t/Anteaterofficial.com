@@ -23,6 +23,33 @@ export const LOCALE: Record<Lang, string> = {
   de: "de-DE",
 }
 
+export const LANG_KEY = "anteater-lang"
+
+const isLang = (v: string | null): v is Lang => v === "cs" || v === "en" || v === "de"
+
+/** Jazyk z adresy (?lang=), pak z volby uživatele, nakonec z prohlížeče. */
+export function loadLang(): Lang {
+  if (typeof window === "undefined") return "cs"
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("lang")
+    if (isLang(fromUrl)) return fromUrl
+    const saved = window.localStorage.getItem(LANG_KEY)
+    if (isLang(saved)) return saved
+  } catch {
+    /* localStorage nemusí být dostupné */
+  }
+  return detectLang()
+}
+
+/** Zapamatuje volbu, aby se držela i na dalších stránkách. */
+export function saveLang(lang: Lang) {
+  try {
+    window.localStorage.setItem(LANG_KEY, lang)
+  } catch {
+    /* ignorujeme */
+  }
+}
+
 export function detectLang(): Lang {
   if (typeof navigator === "undefined") return "cs"
   const langs = navigator.languages?.length ? navigator.languages : [navigator.language]
@@ -179,6 +206,7 @@ type Dict = {
   needDelivery: string
   needAddress: string
   mailNote: (email: string) => string
+  openInGmail: string
   pieces: (n: number) => string
   orderCta: string
   voucherNav: string
@@ -305,6 +333,7 @@ export const dict: Record<Lang, Dict> = {
     needAddress: "Doplň prosím adresu.",
     mailNote: (email) =>
       `Tlačítko otevře e-mail na ${email}. Když ti nefunguje poštovní klient, zkopíruj text a pošli ho odkudkoliv.`,
+    openInGmail: "Otevřít v Gmailu",
     pieces: (n) => `${n} ${n === 1 ? "kus" : n < 5 ? "kusy" : "kusů"}`,
     orderCta: "Objednat",
     voucherNav: "Dárkový poukaz",
@@ -434,6 +463,7 @@ export const dict: Record<Lang, Dict> = {
     needAddress: "Please fill in the address.",
     mailNote: (email) =>
       `The button opens an email to ${email}. If your mail client doesn't work, copy the text and send it from anywhere.`,
+    openInGmail: "Open in Gmail",
     pieces: (n) => `${n} ${n === 1 ? "item" : "items"}`,
     orderCta: "Order",
     voucherNav: "Gift voucher",
@@ -563,6 +593,7 @@ export const dict: Record<Lang, Dict> = {
     needAddress: "Bitte die Adresse ergänzen.",
     mailNote: (email) =>
       `Der Button öffnet eine E-Mail an ${email}. Wenn dein Mailprogramm streikt, kopier den Text und schick ihn von wo du willst.`,
+    openInGmail: "In Gmail öffnen",
     pieces: (n) => `${n} ${n === 1 ? "Stück" : "Stück"}`,
     orderCta: "Bestellen",
     voucherNav: "Geschenkgutschein",

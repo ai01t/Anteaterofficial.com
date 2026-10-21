@@ -9,7 +9,7 @@ import VoucherScene, {
   type View,
   type VoucherHandle,
 } from "../VoucherScene"
-import { LANGS, detectLang, dict, type Lang } from "../i18n"
+import { LANGS, dict, loadLang, saveLang, type Lang } from "../i18n"
 
 export default function VoucherPage() {
   const [lang, setLang] = useState<Lang>("cs")
@@ -20,7 +20,7 @@ export default function VoucherPage() {
   const sceneRef = useRef<VoucherHandle>(null)
 
   useEffect(() => {
-    setLang(detectLang())
+    setLang(loadLang())
   }, [])
 
   const t = dict[lang]
@@ -37,7 +37,7 @@ export default function VoucherPage() {
         <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0B0A09]/85 backdrop-blur">
           <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
             <Link
-              href="/merch"
+              href={`/merch?lang=${lang}`}
               className="text-xs font-bold uppercase tracking-[0.25em] text-white/60 transition hover:text-white"
             >
               ← Merch
@@ -47,7 +47,10 @@ export default function VoucherPage() {
                 <button
                   key={l}
                   type="button"
-                  onClick={() => setLang(l)}
+                  onClick={() => {
+                    setLang(l)
+                    saveLang(l)
+                  }}
                   aria-pressed={lang === l}
                   className={`rounded-full px-2 py-1 transition ${
                     lang === l ? "text-[#927C69]" : "text-white/30 hover:text-white/70"

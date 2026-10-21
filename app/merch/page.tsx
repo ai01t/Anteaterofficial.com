@@ -14,7 +14,8 @@ import {
   SHIP_COUNTRIES,
   countryName,
   detectCountry,
-  detectLang,
+  loadLang,
+  saveLang,
   dict,
   tr,
   type Lang,
@@ -83,7 +84,7 @@ export default function MerchPage() {
   }, [])
 
   useEffect(() => {
-    const detected = detectLang()
+    const detected = loadLang()
     setLang(detected)
     const country = detectCountry()
     setHomeCountry(country)
@@ -297,6 +298,10 @@ export default function MerchPage() {
   const mailto = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(t.mailSubject)}&body=${encodeURIComponent(
     message,
   )}`
+  /** Záloha pro ty, co nemají nastavený poštovní program. */
+  const gmailCompose = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    ORDER_EMAIL,
+  )}&su=${encodeURIComponent(t.mailSubject)}&body=${encodeURIComponent(message)}`
 
   const copy = async () => {
     try {
@@ -326,7 +331,10 @@ export default function MerchPage() {
               <button
                 key={l}
                 type="button"
-                onClick={() => setLang(l)}
+                onClick={() => {
+                  setLang(l)
+                  saveLang(l)
+                }}
                 aria-pressed={lang === l}
                 className={`rounded-full px-2 py-1 transition ${
                   lang === l ? "text-[#927C69]" : "text-white/30 hover:text-white/70"
@@ -495,7 +503,7 @@ export default function MerchPage() {
               <p className="text-sm leading-relaxed text-white/70">{t.voucherCardText}</p>
 
               <Link
-                href="/merch/poukaz"
+                href={`/merch/poukaz?lang=${lang}`}
                 className="mt-auto rounded-full bg-[#927C69] px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.15em] text-black transition hover:bg-white"
               >
                 {t.voucherOpen}
@@ -859,6 +867,7 @@ export default function MerchPage() {
           >
             {t.send}
           </a>
+
           <button
             type="button"
             onClick={copy}
@@ -874,6 +883,19 @@ export default function MerchPage() {
           </p>
         ) : null}
         <p className="mt-4 text-xs text-white/40">
+          {ready ? (
+            <>
+              <a
+                href={gmailCompose}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#927C69] underline underline-offset-4 hover:text-white"
+              >
+                {t.openInGmail}
+              </a>
+              {" · "}
+            </>
+          ) : null}
           {t.mailNote("§MAIL§").split("§MAIL§")[0]}
           <a href={`mailto:${ORDER_EMAIL}`} className="text-[#927C69] underline underline-offset-4">
             {ORDER_EMAIL}

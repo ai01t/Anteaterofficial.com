@@ -253,10 +253,7 @@ export const products: Product[] = [  {
       en: "Smaller cut with the classic logo.",
       de: "Kleinerer Schnitt mit dem klassischen Logo.",
     },
-    specs: [
-      { cs: "Dětská velikost", en: "Kids size", de: "Kindergröße" },
-      { cs: "Logo vepředu", en: "Logo on the front", de: "Logo vorne" },
-    ],
+    specs: [],
     sizes: [UNIVERSAL_SIZE],
     sizeLabel: SIZE_LABEL,
     countsAs: "cap",
