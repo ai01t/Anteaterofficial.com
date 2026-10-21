@@ -104,7 +104,7 @@ export default function HeroStage() {
         }}
       />
 
-      <div className="absolute bottom-6 right-6 z-10 flex items-center gap-2">
+      <div className="absolute bottom-5 right-5 z-10 flex items-center gap-0.5 rounded-full border border-white/10 bg-black/40 px-1.5 py-1 backdrop-blur">
         {slides.map((slide, i) => (
           <button
             key={slide.src}
@@ -112,10 +112,14 @@ export default function HeroStage() {
             onClick={() => select(i)}
             aria-label={`Fotka ${i + 1}`}
             aria-current={i === index}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === index ? "w-7 bg-[#927C69]" : "w-2 bg-white/30 hover:bg-white/60"
-            }`}
-          />
+            className="group flex h-8 w-8 items-center justify-center"
+          >
+            <span
+              className={`block h-1.5 rounded-full transition-all duration-300 ${
+                i === index ? "w-6 bg-[#927C69]" : "w-1.5 bg-white/40 group-hover:bg-white/80"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </>
