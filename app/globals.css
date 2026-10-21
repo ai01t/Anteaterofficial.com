@@ -208,3 +208,410 @@ html {
 .bit-brand {
   opacity: 0.5 !important;
 }
+
+/* --- Merch hero: nájezd na potisk, oddálení, pak klidný posun --- */
+.merch-hero-zoom {
+  transform-origin: 56% 52%;
+  will-change: transform;
+  animation: merch-hero-intro 9s cubic-bezier(0.33, 0, 0.1, 1) both;
+}
+
+.merch-hero-drift {
+  will-change: transform;
+  animation: merch-hero-drift 32s ease-in-out 9s infinite alternate both;
+}
+
+@keyframes merch-hero-intro {
+  0% {
+    transform: scale(2.3);
+  }
+  14% {
+    transform: scale(2.55);
+  }
+  62% {
+    transform: scale(1.14);
+  }
+  78% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes merch-hero-drift {
+  from {
+    transform: translate3d(-1.6%, 0.6%, 0) scale(1.05);
+  }
+  to {
+    transform: translate3d(1.6%, -0.8%, 0) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .merch-hero-zoom,
+  .merch-hero-drift {
+    animation: none;
+    transform: scale(1.05);
+  }
+}
+
+/* Košík: jemný pop při každé změně počtu */
+.cart-pop {
+  animation: cart-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes cart-pop {
+  0% {
+    transform: scale(0.86);
+  }
+  60% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-pop {
+    animation: none;
+  }
+}
+
+/* Štítek NEW u odkazu na merch */
+.new-flag {
+  transform: rotate(-10deg);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  animation: new-flag 900ms ease-in-out 3 both;
+}
+
+@keyframes new-flag {
+  0% {
+    transform: rotate(-10deg) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: rotate(-15deg) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-10deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .new-flag {
+    animation: none;
+  }
+}
+
+/* Merch hero: záběr na světlo nahoře, pak sjezd dolů a oddálení.
+   Posun řešíme přes object-position, aby seděl na všech šířkách. */
+.merch-hero-lamp {
+  will-change: transform;
+  animation: merch-hero-lamp-zoom 11s cubic-bezier(0.32, 0, 0.12, 1) both;
+}
+
+.merch-hero-lamp-img {
+  animation: merch-hero-lamp-pan 11s cubic-bezier(0.32, 0, 0.12, 1) both;
+}
+
+@keyframes merch-hero-lamp-zoom {
+  0% {
+    transform: scale(2.3);
+  }
+  14% {
+    transform: scale(2.2);
+  }
+  45% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes merch-hero-lamp-pan {
+  0% {
+    object-position: 50% 7%;
+  }
+  14% {
+    object-position: 50% 9%;
+  }
+  45% {
+    object-position: 50% 44%;
+  }
+  100% {
+    object-position: 50% 53%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .merch-hero-lamp,
+  .merch-hero-lamp-img {
+    animation: none;
+  }
+}
+
+/* Štítek NEW u odkazu na merch */
+.new-flag {
+  transform: rotate(-10deg);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  animation: new-flag 900ms ease-in-out 3 both;
+}
+
+@keyframes new-flag {
+  0% {
+    transform: rotate(-10deg) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: rotate(-15deg) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-10deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .new-flag {
+    animation: none;
+  }
+}
+
+/* Merch hero: záběr na světlo nahoře, pak sjezd dolů a oddálení */
+.merch-hero-lamp {
+  will-change: transform;
+  animation: merch-hero-lamp 11s cubic-bezier(0.32, 0, 0.12, 1) both;
+}
+
+@keyframes merch-hero-lamp {
+  0% {
+    transform: scale(2.25) translate3d(0, 2%, 0);
+  }
+  12% {
+    transform: scale(2.15) translate3d(0, 1%, 0);
+  }
+  70% {
+    transform: scale(1.4) translate3d(0, -62%, 0);
+  }
+  100% {
+    transform: scale(1.06) translate3d(0, -116%, 0);
+  }
+}
+
+/* ── Dárkový poukaz: 3D karta (stejná mechanika jako mlynnapile.cz/gift) ── */
+.v-stage {
+  position: relative;
+  border-radius: 1rem;
+  background:
+    radial-gradient(ellipse 60% 55% at 50% 38%, rgba(255, 244, 228, 0.07), rgba(0, 0, 0, 0) 72%),
+    linear-gradient(180deg, #14110d 0%, #0b0a09 100%);
+  height: min(76vh, 760px);
+  min-height: 340px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.v-stage.compact {
+  height: 100%;
+  min-height: 0;
+  border-radius: 0;
+  background:
+    radial-gradient(ellipse 60% 55% at 50% 42%, rgba(255, 244, 228, 0.09), rgba(0, 0, 0, 0) 72%),
+    linear-gradient(180deg, #17130e 0%, #0b0a09 100%);
+}
+
+.v-scene {
+  position: absolute;
+  inset: 0;
+  perspective: 2400px;
+  perspective-origin: 50% 42%;
+}
+.v-rig {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 10px);
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.v-card {
+  position: absolute;
+  left: -105mm;
+  top: 0;
+  width: 210mm;
+  height: 148.5mm;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.v-ground {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 10px);
+  width: 220mm;
+  margin-left: -110mm;
+  height: 22mm;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+  filter: blur(5px);
+}
+.v-leaf {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: 50% 0;
+}
+.v-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    0 0 0 0.2mm rgba(0, 0, 0, 0.22),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 22px 44px -14px rgba(0, 0, 0, 0.6);
+}
+/* jemná struktura papíru */
+.v-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse 120% 90% at 50% 0%, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0) 60%),
+    radial-gradient(ellipse 80% 60% at 85% 100%, rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0) 70%);
+}
+.v-face.inside {
+  transform: rotateX(180deg);
+}
+.v-face.outer {
+  transform: rotateY(180deg);
+}
+.v-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .3 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.v-paper-dark .v-face::after {
+  opacity: 0.45;
+  mix-blend-mode: screen;
+}
+
+.v-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+}
+.v-face.front .v-shade {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.55));
+}
+.v-face.inside .v-shade {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05));
+}
+.v-face.inner .v-shade {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 78%);
+}
+.v-crease {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8mm;
+  pointer-events: none;
+  z-index: 3;
+}
+.v-face.inside .v-crease {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0));
+}
+.v-face.inner .v-crease {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0));
+}
+
+/* panel poukazu – 210 × 148,5 mm */
+.v-panel {
+  position: absolute;
+  inset: 0;
+  width: 210mm;
+  height: 148.5mm;
+  overflow: hidden;
+  padding: 14mm 16mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── tisk: 2 × A4, přeložit napůl ── */
+.v-print {
+  display: none;
+}
+.v-sheet {
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  overflow: hidden;
+  break-after: page;
+}
+.v-slot {
+  position: absolute;
+  left: 0;
+  width: 210mm;
+  height: 148.5mm;
+  overflow: hidden;
+}
+.v-slot.top {
+  top: 0;
+}
+.v-slot.bottom {
+  top: 148.5mm;
+}
+.v-slot.rot {
+  transform: rotate(180deg);
+}
+.v-foldmark {
+  position: absolute;
+  top: 148.5mm;
+  width: 4mm;
+  border-top: 0.2mm solid rgba(120, 110, 95, 0.6);
+}
+.v-foldmark.l {
+  left: 4.5mm;
+}
+.v-foldmark.r {
+  right: 4.5mm;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  html,
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .v-screen {
+    display: none !important;
+  }
+  .v-print {
+    display: block;
+  }
+}

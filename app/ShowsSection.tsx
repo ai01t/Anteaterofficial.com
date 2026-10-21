@@ -22,6 +22,9 @@ const ShowsSectionComponent = ({ events, loading }: ShowsSectionProps) => {
           <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
             Upcoming Shows
           </h2>
+          <p className="text-lg font-semibold text-black mb-6 text-center md:text-left">
+            Autumn Tour with Cocotte Minute
+          </p>
           <div className="bg-white/5 backdrop-blur-md rounded-lg p-6 text-base text-black">
             {loading ? (
               <div className="flex justify-center py-8">

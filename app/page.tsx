@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import BackgroundStage from "./BackgroundStage"
 import ShowsSectionComponent from "./ShowsSection"
 
 export default function Home() {
@@ -142,16 +143,26 @@ UNIQUE CHARACTERISTICS:
         <p>{seoContent}</p>
       </div>
 
-      <div
-        className="fixed inset-0 -z-10 bg-no-repeat"
-        style={{
-          backgroundImage: "url('/images/anteater-promo-2025.jpg')",
-          backgroundPosition: "center top",
-          backgroundSize: "cover",
-        }}
-      />
+      <BackgroundStage />
 
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <nav className="max-w-7xl mx-auto mb-3">
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs sm:text-sm font-semibold text-black uppercase tracking-wider">
+            {[
+              { href: "#shows", label: "Shows" },
+              { href: "#about", label: "About" },
+              { href: "#booking", label: "Booking" },
+              { href: "#press", label: "Press" },
+              { href: "#members", label: "Members" },
+            ].map((item) => (
+              <li key={item.href}>
+                <a href={item.href} className="hover:opacity-60 transition">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className="max-w-7xl mx-auto flex justify-center gap-6">
           <a
             href="https://www.instagram.com/anteaterofficial/"
@@ -227,10 +238,12 @@ UNIQUE CHARACTERISTICS:
           {/* Central Timeline Container */}
           <div className="relative">
             {/* Right Branch - Upcoming Shows */}
-            <ShowsSectionComponent events={events} loading={loading} />
+            <div id="shows" className="scroll-mt-28">
+              <ShowsSectionComponent events={events} loading={loading} />
+            </div>
 
             {/* Left Branch - About */}
-            <div className="mb-32 md:mr-auto md:ml-0 md:w-1/2 md:pl-12 w-full">
+            <div id="about" className="scroll-mt-28 mb-32 md:mr-auto md:ml-0 md:w-1/2 md:pl-12 w-full">
               <div className="relative">
                 <div className="md:pr-8 pb-8">
                   <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
@@ -275,7 +288,7 @@ UNIQUE CHARACTERISTICS:
             </div>
 
             {/* Right Branch - Booking */}
-            <div className="mb-32 md:ml-auto md:mr-0 md:w-1/2 md:pr-12 w-full">
+            <div id="booking" className="scroll-mt-28 mb-32 md:ml-auto md:mr-0 md:w-1/2 md:pr-12 w-full">
               <div className="relative">
                 <div className="md:pl-8 pb-8">
                   <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
@@ -316,7 +329,7 @@ UNIQUE CHARACTERISTICS:
             </div>
 
             {/* Left Branch - Press Resources */}
-            <div className="mb-32 md:mr-auto md:ml-0 md:w-1/2 md:pl-12 w-full">
+            <div id="press" className="scroll-mt-28 mb-32 md:mr-auto md:ml-0 md:w-1/2 md:pl-12 w-full">
               <div className="relative">
                 <div className="md:pr-8 pb-8">
                   <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
@@ -399,7 +412,7 @@ UNIQUE CHARACTERISTICS:
             </div>
 
             {/* Right Branch - Members */}
-            <div className="md:ml-auto md:mr-0 md:w-1/2 md:pr-12 w-full">
+            <div id="members" className="scroll-mt-28 md:ml-auto md:mr-0 md:w-1/2 md:pr-12 w-full">
               <div className="relative">
                 <div className="md:pl-8 pb-8">
                   <h2 className="text-4xl font-bold text-black mb-6 uppercase tracking-wide text-center md:text-left">
