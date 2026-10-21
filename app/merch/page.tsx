@@ -379,13 +379,13 @@ export default function MerchPage() {
         </div>
       </header>
 
-      {/* Hero – fotky zasazené do okna */}
-      <section className="border-b border-white/10 bg-[#0B0A09] px-4 py-8 md:px-8 md:py-12">
-        <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center overflow-hidden rounded-xl border border-white/10 md:min-h-[520px]">
+      {/* Hero – fotky přes celou šířku */}
+      <section className="border-b border-white/10 bg-[#0B0A09]">
+        <div className="relative flex min-h-[460px] items-center overflow-hidden md:min-h-[560px]">
           <HeroStage />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0A09]/90 via-[#0B0A09]/55 to-[#0B0A09]/25" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B0A09]/70 via-transparent to-[#0B0A09]/35" />
-          <div className="relative px-8 py-14 md:px-14 md:py-20">
+          <div className="relative mx-auto w-full max-w-6xl px-6 py-16 md:px-10 md:py-24">
             <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#927C69]">Anteater official</p>
             <h1 className="mt-4 text-5xl font-bold uppercase leading-[0.95] tracking-tight md:text-8xl">Merch</h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75">{t.heroIntro}</p>
