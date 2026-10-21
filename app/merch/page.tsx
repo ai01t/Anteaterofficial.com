@@ -343,11 +343,25 @@ export default function MerchPage() {
             aria-label={itemCount > 0 ? t.cartItems(itemCount) : t.cart}
             className={
               itemCount > 0
-                ? "cart-pop flex items-center gap-2.5 rounded-full bg-[#927C69] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-black shadow-[0_0_0_1px_rgba(146,124,105,0.6),0_8px_24px_-8px_rgba(146,124,105,0.9)] transition hover:bg-white"
-                : "text-[11px] font-semibold uppercase tracking-[0.25em] text-white/35 transition hover:text-white/70"
+                ? "cart-pop flex items-center gap-2 rounded-full bg-[#927C69] px-3.5 py-2 text-black shadow-[0_0_0_1px_rgba(146,124,105,0.6),0_8px_24px_-8px_rgba(146,124,105,0.9)] transition hover:bg-white"
+                : "flex items-center p-2 text-white/25 transition hover:text-white/60"
             }
           >
-            {t.cart}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={itemCount > 0 ? 2 : 1.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 4h2.2l1.5 10.2a2 2 0 0 0 2 1.7h7.8a2 2 0 0 0 2-1.6L20 7H6.2" />
+              <circle cx="10" cy="20" r="1.3" />
+              <circle cx="17" cy="20" r="1.3" />
+            </svg>
             {itemCount > 0 ? (
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-black/85 px-1.5 text-[11px] font-bold text-[#E8DCCF]">
                 {itemCount}

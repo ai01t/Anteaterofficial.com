@@ -154,7 +154,6 @@ export const products: Product[] = [  {
       de: "Weißes Langarmshirt, klassisches Logo",
     },
     price: 500,
-    compareAtPrice: 600,
     images: [{ src: "/images/merch/ls-white.jpg", alt: "Bílé Legacy tričko s dlouhým rukávem" }],
     description: {
       cs: "Baseballový střih s kontrastními rukávy a klasickým logem ANTEATER. Potisk jen vepředu.",
@@ -180,7 +179,6 @@ export const products: Product[] = [  {
       de: "Graues Langarmshirt, klassisches Logo",
     },
     price: 500,
-    compareAtPrice: 600,
     images: [
       { src: "/images/merch/ls-grey.jpg", alt: "Šedé Legacy tričko s dlouhým rukávem" },
       { src: "/images/merch/ls-grey-2.jpg", alt: "Šedé Legacy tričko – detail potisku" },
