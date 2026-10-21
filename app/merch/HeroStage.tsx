@@ -8,7 +8,7 @@ type Slide = {
   alt: string
   /** Volitelná jiná choreografie – jinak nájezd na potisk. */
   anim?: string
-  /** Animace výřezu fotky (object-position) místo posunu obalu. */
+  /** Animace výřezu fotky (object-position). */
   imgAnim?: string
   /** Bod, ze kterého se odjíždí – potisk na tričku. */
   origin: string
@@ -28,8 +28,8 @@ const slides: Slide[] = [
     src: "/images/merch/cliff-back-3.jpg",
     alt: "Světlo nad kapelou ANTEATER ve studiu",
     origin: "50% 50%",
-    objectPosition: "center top",
-    opacity: "opacity-70",
+    objectPosition: "center",
+    opacity: "opacity-75",
     anim: "merch-hero-lamp",
     imgAnim: "merch-hero-lamp-img",
   },
@@ -43,7 +43,7 @@ const slides: Slide[] = [
 ]
 
 /** Jak dlouho jeden záběr zůstane, než se přepne sám. */
-const AUTOPLAY_MS = 16000
+const AUTOPLAY_MS = 17000
 
 export default function HeroStage() {
   const [index, setIndex] = useState(0)
@@ -94,6 +94,15 @@ export default function HeroStage() {
           </div>
         ))}
       </div>
+
+      {/* plynulé zatmavení po stranách, ať fotka nekončí ostrou hranou */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            "linear-gradient(to right, #0B0A09 0%, rgba(11,10,9,0.55) 7%, rgba(11,10,9,0) 20%, rgba(11,10,9,0) 80%, rgba(11,10,9,0.55) 93%, #0B0A09 100%)",
+        }}
+      />
 
       <div className="absolute bottom-6 right-6 z-10 flex items-center gap-2">
         {slides.map((slide, i) => (
