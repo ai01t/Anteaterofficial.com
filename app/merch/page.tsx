@@ -441,12 +441,12 @@ export default function MerchPage() {
                       return (
                         <>
                           {before}
-                          <Link
-                            href={`/merch/poukaz?lang=${lang}`}
+                          <a
+                            href="#poukaz"
                             className="text-[#927C69] underline decoration-[#927C69]/40 underline-offset-4 hover:text-white"
                           >
                             {phrase}
-                          </Link>
+                          </a>
                           {rest.join(phrase)}
                         </>
                       )
@@ -582,7 +582,7 @@ export default function MerchPage() {
           </article>
 
           {/* Dárkový poukaz */}
-          <article className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-[#927C69]/50">
+          <article id="poukaz" className="scroll-mt-24 flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-[#927C69]/50">
             <div className="relative aspect-[4/5] overflow-hidden bg-black">
               <VoucherScene
                 lang={lang}
