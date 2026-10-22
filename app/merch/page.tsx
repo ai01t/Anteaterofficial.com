@@ -29,7 +29,9 @@ type CartItem = {
   size: string
   qty: number
   price: number | null
-  countsAs: "tee" | "cap"
+  countsAs: "tee" | "cap" | "voucher"
+  /** Volný popis (u poukazu: pro koho, od koho, vzkaz). */
+  note?: string
 }
 
 type Show = {
@@ -218,8 +220,9 @@ export default function MerchPage() {
     const lines: string[] = [t.msgHello, "", t.msgWant]
     cart.forEach((i) => {
       const parts = [i.name]
+      if (i.note) parts.push(i.note)
       if (i.variant) parts.push(t.printShort(i.variant))
-      if (i.size !== UNIVERSAL_SIZE) parts.push(t.sizeShort(i.size))
+      if (!i.note && i.size !== UNIVERSAL_SIZE) parts.push(t.sizeShort(i.size))
       lines.push(`• ${parts.join(", ")} — ${i.qty}×`)
     })
     if (coasterQty > 0) lines.push(t.msgCoasters(coasterQty))
@@ -424,7 +427,23 @@ export default function MerchPage() {
                 {heroText === 0 ? (
                   <>
                     <span className="mb-2 block font-semibold text-white">{t.heroPromoLead}</span>
-                    {t.heroPromo}
+                    {(() => {
+                      const phrase = { cs: "dárkový poukaz", en: "gift voucher", de: "Geschenkgutschein" }[lang]
+                      const [before, ...rest] = t.heroPromo.split(phrase)
+                      if (rest.length === 0) return t.heroPromo
+                      return (
+                        <>
+                          {before}
+                          <Link
+                            href={`/merch/poukaz?lang=${lang}`}
+                            className="text-[#927C69] underline decoration-[#927C69]/40 underline-offset-4 hover:text-white"
+                          >
+                            {phrase}
+                          </Link>
+                          {rest.join(phrase)}
+                        </>
+                      )
+                    })()}
                   </>
                 ) : (
                   t.heroIntro
@@ -602,9 +621,8 @@ export default function MerchPage() {
                   <div className="min-w-0">
                     <p className="truncate font-semibold">{i.name}</p>
                     <p className="text-xs text-white/50">
-                      {[i.variant ? t.printShort(i.variant) : null, t.sizeShort(i.size)]
-                        .filter(Boolean)
-                        .join(" · ")}
+                      {i.note ??
+                        [i.variant ? t.printShort(i.variant) : null, t.sizeShort(i.size)].filter(Boolean).join(" · ")}
                     </p>
                   </div>
                   <div className="flex items-center gap-4">

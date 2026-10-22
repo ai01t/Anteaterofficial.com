@@ -7,7 +7,7 @@ import { dict, type Lang } from "./i18n"
 export type LogoVariant = "new" | "legacy"
 export type Theme = "dark" | "light"
 export type View = "front" | "open" | "back"
-export type VoucherFields = { to: string; from: string; message: string }
+export type VoucherFields = { to: string; from: string; message: string; amount?: number }
 
 export type VoucherHandle = { goTo: (v: View) => void }
 
@@ -219,7 +219,7 @@ const VoucherScene = forwardRef<VoucherHandle, Props>(function VoucherScene(
             <div ref={frontLeaf} className="v-leaf">
               <div className="v-face front" style={panelStyle}>
                 <div ref={shade1} className="v-shade" />
-                <CoverPanel t={t} logo={logo} dark={dark} />
+                <CoverPanel t={t} logo={logo} dark={dark} amount={fields.amount} />
               </div>
               <div className="v-face inside" style={panelStyle}>
                 <div className="v-crease" />
@@ -263,7 +263,7 @@ export function VoucherPrintSheets({
           <BackPanel t={t} fields={fields} logo={logo} dark={dark} soft={soft} line={line} />
         </div>
         <div className="v-slot bottom">
-          <CoverPanel t={t} logo={logo} dark={dark} />
+          <CoverPanel t={t} logo={logo} dark={dark} amount={fields.amount} />
         </div>
       </div>
       <div className="v-sheet" style={panelStyle}>
@@ -285,13 +285,18 @@ export function VoucherPrintSheets({
 type T = (typeof dict)["cs"]
 type Fields = VoucherFields
 
-function CoverPanel({ t, logo, dark }: { t: T; logo: LogoVariant; dark: boolean }) {
+function CoverPanel({ t, logo, dark, amount }: { t: T; logo: LogoVariant; dark: boolean; amount?: number }) {
   return (
     <div className="v-panel" style={{ alignItems: "center", justifyContent: "center", gap: "8mm" }}>
       <Logo variant={logo} dark={dark} width={logo === "legacy" ? "78mm" : "52mm"} stacked />
       <span style={{ color: ACCENT, fontSize: "8pt", letterSpacing: "0.45em", textTransform: "uppercase" }}>
         {t.voucherTitle}
       </span>
+      {amount ? (
+        <span style={{ fontSize: "18pt", fontWeight: 700, letterSpacing: "0.04em" }}>
+          {amount.toLocaleString("cs-CZ")} Kč
+        </span>
+      ) : null}
 
     </div>
   )

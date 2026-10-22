@@ -230,6 +230,17 @@ type Dict = {
   voucherLight: string
   voucherPrint: string
   voucherFor: string
+  voucherAmount: string
+  voucherAddToCart: string
+  voucherOrderNow: string
+  voucherAdded: string
+  voucherNeedAmount: string
+  voucherForBand: string
+  voucherForBandValue: string
+  voucherBandThanks: string
+  voucherCartName: string
+  voucherCartNote: (to: string, from: string, msg: string) => string
+  voucherCustom: string
   voucherForPh: string
   voucherFrom: string
   voucherFromPh: string
@@ -365,6 +376,20 @@ export const dict: Record<Lang, Dict> = {
     voucherDark: "Tmavý",
     voucherLight: "Světlý",
     voucherPrint: "Vytisknout / uložit PDF",
+    voucherAmount: "Hodnota poukazu",
+    voucherAddToCart: "Přidat do košíku",
+    voucherOrderNow: "Rovnou objednat",
+    voucherAdded: "Poukaz je v košíku ✓",
+    voucherNeedAmount: "Zadej prosím částku poukazu.",
+    voucherForBand: "Pro Anteater na desku",
+    voucherForBandValue: "Anteater – na desku",
+    voucherBandThanks: "Děkujeme a moc si toho vážíme – vaše jméno proto chceme zvěčnit na booklet naší desky ❤",
+    voucherCartName: "Dárkový poukaz",
+    voucherCartNote: (to, from, msg) =>
+      [to ? `pro: ${to}` : "", from ? `od: ${from}` : "", msg ? `vzkaz: ${msg}` : "vzkaz doplním později"]
+        .filter(Boolean)
+        .join(" · "),
+    voucherCustom: "Vlastní částka",
     voucherFor: "Pro koho",
     voucherForPh: "Jméno obdarovaného",
     voucherFrom: "Od koho",
@@ -503,6 +528,20 @@ export const dict: Record<Lang, Dict> = {
     voucherDark: "Dark",
     voucherLight: "Light",
     voucherPrint: "Print / save as PDF",
+    voucherAmount: "Voucher value",
+    voucherAddToCart: "Add to cart",
+    voucherOrderNow: "Order now",
+    voucherAdded: "Voucher added to cart ✓",
+    voucherNeedAmount: "Please enter the voucher amount.",
+    voucherForBand: "For Anteater's record",
+    voucherForBandValue: "Anteater – for the record",
+    voucherBandThanks: "Thank you, we really appreciate it – that's why we want to immortalise your name in our record's booklet ❤",
+    voucherCartName: "Gift voucher",
+    voucherCartNote: (to, from, msg) =>
+      [to ? `for: ${to}` : "", from ? `from: ${from}` : "", msg ? `message: ${msg}` : "message to follow"]
+        .filter(Boolean)
+        .join(" · "),
+    voucherCustom: "Custom amount",
     voucherFor: "For",
     voucherForPh: "Recipient's name",
     voucherFrom: "From",
@@ -641,6 +680,20 @@ export const dict: Record<Lang, Dict> = {
     voucherDark: "Dunkel",
     voucherLight: "Hell",
     voucherPrint: "Drucken / als PDF speichern",
+    voucherAmount: "Gutscheinwert",
+    voucherAddToCart: "In den Warenkorb",
+    voucherOrderNow: "Direkt bestellen",
+    voucherAdded: "Gutschein im Warenkorb ✓",
+    voucherNeedAmount: "Bitte gib den Gutscheinbetrag ein.",
+    voucherForBand: "Für Anteaters Platte",
+    voucherForBandValue: "Anteater – für die Platte",
+    voucherBandThanks: "Danke, das bedeutet uns viel – deshalb wollen wir deinen Namen im Booklet unserer Platte verewigen ❤",
+    voucherCartName: "Geschenkgutschein",
+    voucherCartNote: (to, from, msg) =>
+      [to ? `für: ${to}` : "", from ? `von: ${from}` : "", msg ? `Nachricht: ${msg}` : "Nachricht folgt"]
+        .filter(Boolean)
+        .join(" · "),
+    voucherCustom: "Eigener Betrag",
     voucherFor: "Für",
     voucherForPh: "Name der beschenkten Person",
     voucherFrom: "Von",
