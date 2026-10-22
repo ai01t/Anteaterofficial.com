@@ -128,7 +128,7 @@ export default function VoucherPage() {
 
         <main className="mx-auto max-w-5xl px-6 py-14">
           <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#927C69]">
-            {t.voucherKicker}
+            {forBand ? t.voucherKickerBand : t.voucherKicker}
           </p>
           <h1 className="mt-3 text-4xl font-bold uppercase tracking-tight md:text-6xl">
             {t.voucherTitle}
