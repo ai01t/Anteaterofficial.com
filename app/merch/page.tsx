@@ -71,6 +71,7 @@ export default function MerchPage() {
   const [follows, setFollows] = useState(false)
   const [copied, setCopied] = useState(false)
   const [heroText, setHeroText] = useState(0)
+  const [cardBand, setCardBand] = useState(false)
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "error">("idle")
   const [form, setForm] = useState({
     name: "",
@@ -584,25 +585,65 @@ export default function MerchPage() {
           {/* Dárkový poukaz */}
           <article id="poukaz" className="scroll-mt-24 flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-[#927C69]/50">
             <div className="relative aspect-[4/5] overflow-hidden bg-black">
-              <VoucherScene
-                lang={lang}
-                logo="new"
-                theme="dark"
-                fields={{ to: "", from: "", message: "" }}
-                compact
-              />
+              {cardBand ? (
+                <div className="heart-in absolute inset-0 flex items-center justify-center bg-black">
+                  <Image
+                    src="/images/merch/heart.png"
+                    alt=""
+                    width={900}
+                    height={900}
+                    className="heart-beat h-auto w-[62%]"
+                  />
+                </div>
+              ) : (
+                <VoucherScene
+                  lang={lang}
+                  logo="new"
+                  theme="dark"
+                  fields={{ to: "", from: "", message: "" }}
+                  compact
+                />
+              )}
+
+              {/* přepínač Dárkový poukaz / Deska Anteater */}
+              <div className="absolute left-4 top-4 z-10 inline-flex gap-1 rounded-full border border-white/15 bg-black/60 p-1 backdrop-blur">
+                {[
+                  { band: false, label: t.voucherTitle },
+                  { band: true, label: t.voucherRecordTab },
+                ].map((tab) => (
+                  <button
+                    key={String(tab.band)}
+                    type="button"
+                    onClick={() => setCardBand(tab.band)}
+                    aria-pressed={cardBand === tab.band}
+                    className={`rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] transition ${
+                      cardBand === tab.band ? "bg-[#927C69] text-black" : "text-white/55 hover:text-white"
+                    }`}
+                  >
+                    {tab.label}
+                    {tab.band ? " ❤" : ""}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="flex flex-1 flex-col gap-5 p-6">
               <header>
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#927C69]">{t.voucherKicker}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#927C69]">
+                  {cardBand ? t.voucherKickerBand : t.voucherKicker}
+                </p>
                 <h3 className="mt-2 text-2xl font-bold uppercase tracking-wide text-white">{t.voucherCardTitle}</h3>
               </header>
 
-              <p className="text-sm leading-relaxed text-white/70">{t.voucherCardText}</p>
+              <p key={String(cardBand)} className="hero-text-in text-sm leading-relaxed text-white/70">
+                {cardBand ? t.voucherCardBandText : t.voucherCardText}
+                {cardBand ? (
+                  <span className="mt-3 block text-xs text-white/45">{t.voucherDonorOrder}</span>
+                ) : null}
+              </p>
 
               <Link
-                href={`/merch/poukaz?lang=${lang}`}
+                href={`/merch/poukaz?lang=${lang}${cardBand ? "&band=1" : ""}`}
                 className="mt-auto rounded-full bg-[#927C69] px-6 py-3 text-center text-xs font-bold uppercase tracking-[0.15em] text-black transition hover:bg-white"
               >
                 {t.voucherOpen}

@@ -1,55 +1,45 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import { useState } from "react";
-import type { Product } from "./data";
-import { cardDict, money, tr, type Lang } from "./i18n";
+import Image from "next/image"
+import { useState } from "react"
+import type { Product } from "./data"
+import { cardDict, money, tr, type Lang } from "./i18n"
 
 type Props = {
-  product: Product;
-  lang: Lang;
-  inCart: number;
-  onAdd: (args: {
-    product: Product;
-    size: string;
-    choiceId?: string;
-    choiceLabel?: string;
-    qty: number;
-  }) => void;
-};
+  product: Product
+  lang: Lang
+  inCart: number
+  onAdd: (args: { product: Product; size: string; choiceId?: string; choiceLabel?: string; qty: number }) => void
+}
 
 export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
-  const c = cardDict[lang];
-  const [active, setActive] = useState(0);
-  const [size, setSize] = useState(
-    product.sizes.length === 1 ? product.sizes[0] : "",
-  );
+  const c = cardDict[lang]
+  const [active, setActive] = useState(0)
+  const [size, setSize] = useState(product.sizes.length === 1 ? product.sizes[0] : "")
   const [choice, setChoice] = useState(
-    product.option
-      ? product.option.choices[product.option.choices.length - 1].id
-      : "",
-  );
-  const [qty, setQty] = useState(1);
-  const [justAdded, setJustAdded] = useState(false);
-  const [sizeOpen, setSizeOpen] = useState(false);
+    product.option ? product.option.choices[product.option.choices.length - 1].id : "",
+  )
+  const [qty, setQty] = useState(1)
+  const [justAdded, setJustAdded] = useState(false)
+  const [sizeOpen, setSizeOpen] = useState(false)
 
-  const soldOut = product.soldOut === true;
-  const needsSize = !size;
-  const selectedChoice = product.option?.choices.find((ch) => ch.id === choice);
+  const soldOut = product.soldOut === true
+  const needsSize = !size
+  const selectedChoice = product.option?.choices.find((ch) => ch.id === choice)
 
   const handleAdd = () => {
-    if (needsSize || soldOut) return;
+    if (needsSize || soldOut) return
     onAdd({
       product,
       size,
       choiceId: choice || undefined,
       choiceLabel: selectedChoice ? tr(selectedChoice.label, lang) : undefined,
       qty,
-    });
-    setJustAdded(true);
-    setQty(1);
-    window.setTimeout(() => setJustAdded(false), 1600);
-  };
+    })
+    setJustAdded(true)
+    setQty(1)
+    window.setTimeout(() => setJustAdded(false), 1600)
+  }
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-[#927C69]/50">
@@ -94,18 +84,10 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
                 aria-label={`${c.photo} ${i + 1}`}
                 aria-current={i === active}
                 className={`h-12 w-12 overflow-hidden rounded-lg border transition ${
-                  i === active
-                    ? "border-[#927C69]"
-                    : "border-white/25 opacity-60 hover:opacity-100"
+                  i === active ? "border-[#927C69]" : "border-white/25 opacity-60 hover:opacity-100"
                 }`}
               >
-                <Image
-                  src={img.src}
-                  alt=""
-                  width={96}
-                  height={96}
-                  className="h-full w-full object-cover"
-                />
+                <Image src={img.src} alt="" width={96} height={96} className="h-full w-full object-cover" />
               </button>
             ))}
           </div>
@@ -114,22 +96,12 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
 
       <div className="flex flex-1 flex-col gap-5 p-6">
         <header>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#927C69]">
-            {product.line}
-          </p>
-          <h3 className="mt-2 text-2xl font-bold uppercase tracking-wide text-white">
-            {tr(product.name, lang)}
-          </h3>
-          {product.tagline ? (
-            <p className="mt-1 text-sm text-white/60">
-              {tr(product.tagline, lang)}
-            </p>
-          ) : null}
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#927C69]">{product.line}</p>
+          <h3 className="mt-2 text-2xl font-bold uppercase tracking-wide text-white">{tr(product.name, lang)}</h3>
+          {product.tagline ? <p className="mt-1 text-sm text-white/60">{tr(product.tagline, lang)}</p> : null}
         </header>
 
-        <p className="text-sm leading-relaxed text-white/70">
-          {tr(product.description, lang)}
-        </p>
+        <p className="text-sm leading-relaxed text-white/70">{tr(product.description, lang)}</p>
 
         {product.option ? (
           <div>
@@ -154,9 +126,7 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
               ))}
             </div>
             {selectedChoice?.note ? (
-              <p className="mt-2 text-xs text-white/45">
-                {tr(selectedChoice.note, lang)}
-              </p>
+              <p className="mt-2 text-xs text-white/45">{tr(selectedChoice.note, lang)}</p>
             ) : null}
           </div>
         ) : null}
@@ -171,8 +141,8 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
                 key={s}
                 type="button"
                 onClick={() => {
-                  setSize(s);
-                  setSizeOpen(false);
+                  setSize(s)
+                  setSizeOpen(false)
                 }}
                 aria-pressed={size === s}
                 className={`min-w-12 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${
@@ -190,12 +160,8 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
         {product.specs.length > 0 ? (
           <details className="group/detail">
             <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-[11px] text-white/35 transition hover:text-white/70">
-              <span className="underline decoration-white/20 underline-offset-4">
-                {c.detail}
-              </span>
-              <span className="text-[9px] transition group-open/detail:rotate-90">
-                ›
-              </span>
+              <span className="underline decoration-white/20 underline-offset-4">{c.detail}</span>
+              <span className="text-[9px] transition group-open/detail:rotate-90">›</span>
             </summary>
             <ul className="mt-3 space-y-1.5 text-xs leading-relaxed text-white/55">
               {product.specs.map((s) => (
@@ -222,13 +188,9 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
           <div>
             {product.price !== null ? (
               <p className="flex items-baseline gap-2">
-                <span className="text-xl font-bold text-white">
-                  {money(product.price, lang)}
-                </span>
+                <span className="text-xl font-bold text-white">{money(product.price, lang)}</span>
                 {product.compareAtPrice ? (
-                  <span className="text-sm text-white/35 line-through">
-                    {money(product.compareAtPrice, lang)}
-                  </span>
+                  <span className="text-sm text-white/35 line-through">{money(product.compareAtPrice, lang)}</span>
                 ) : null}
               </p>
             ) : soldOut ? null : (
@@ -237,9 +199,7 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
           </div>
 
           <div className="flex items-center gap-3">
-            <div
-              className={`flex items-center rounded-full border border-white/20 ${soldOut ? "hidden" : ""}`}
-            >
+            <div className={`flex items-center rounded-full border border-white/20 ${soldOut ? "hidden" : ""}`}>
               <button
                 type="button"
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
@@ -248,9 +208,7 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
               >
                 −
               </button>
-              <span className="min-w-6 text-center text-sm font-bold text-white">
-                {qty}
-              </span>
+              <span className="min-w-6 text-center text-sm font-bold text-white">{qty}</span>
               <button
                 type="button"
                 onClick={() => setQty((q) => Math.min(9, q + 1))}
@@ -269,8 +227,8 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
                       key={s}
                       type="button"
                       onClick={() => {
-                        setSize(s);
-                        setSizeOpen(false);
+                        setSize(s)
+                        setSizeOpen(false)
                       }}
                       className="min-w-10 rounded-full px-3 py-2 text-xs font-bold uppercase tracking-wider text-white/75 transition hover:bg-[#927C69] hover:text-black"
                     >
@@ -282,9 +240,7 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
 
               <button
                 type="button"
-                onClick={() =>
-                  needsSize ? setSizeOpen((o) => !o) : handleAdd()
-                }
+                onClick={() => (needsSize ? setSizeOpen((o) => !o) : handleAdd())}
                 disabled={soldOut}
                 aria-expanded={needsSize ? sizeOpen : undefined}
                 className={`rounded-full px-5 py-3 text-xs font-bold uppercase tracking-[0.15em] transition ${
@@ -297,18 +253,12 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
                         : "bg-[#927C69] text-black hover:bg-white"
                 }`}
               >
-                {soldOut
-                  ? c.soldOut
-                  : needsSize
-                    ? c.chooseSize
-                    : justAdded
-                      ? c.added
-                      : c.add}
+                {soldOut ? c.soldOut : needsSize ? c.chooseSize : justAdded ? c.added : c.add}
               </button>
             </div>
           </div>
         </div>
       </div>
     </article>
-  );
+  )
 }

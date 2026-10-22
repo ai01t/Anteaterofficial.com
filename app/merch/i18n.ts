@@ -265,6 +265,9 @@ type Dict = {
   voucherHint: string
   voucherCardText: string
   voucherCardTitle: string
+  voucherRecordTab: string
+  voucherCardBandText: string
+  voucherDonorOrder: string
   voucherViewFront: string
   voucherViewInside: string
   voucherViewBack: string
@@ -417,6 +420,10 @@ export const dict: Record<Lang, Dict> = {
       "Martine, užij si dárek od nás – můžeš si koupit triko nebo kšiltovku. A vzhledem k tomu, že seš muzikant, můžeš ho použít i pro mlynnapile.cz – studio kapely Anteater. Mrkni na to ;)",
     voucherHint: "",
     voucherCardTitle: "Dárkový poukaz / Deska Anteater",
+    voucherRecordTab: "Deska Anteater",
+    voucherDonorOrder: "Jména donátorů budou na bookletu seřazena podle výše příspěvku.",
+    voucherCardBandText:
+      "Chceš podpořit vznik naší nové desky? Přispěj libovolnou částkou a tvoje jméno zvěčníme na bookletu. Děkujeme a moc si toho vážíme ❤",
     voucherCardText:
       "Pokud nevíte, co vybrat jako dárek, pořiďte dárkový poukaz. A pokud chcete podpořit vznik naší desky a být na bookletu, napište „chci desku“ – až bude hotová, dostanete ji ve fyzické podobě. Jména donátorů budou na bookletu seřazena podle výše příspěvku. Děkujeme.",
     voucherViewFront: "Titulka",
@@ -571,6 +578,10 @@ export const dict: Record<Lang, Dict> = {
       "Enjoy this gift from us – pick a tee or a cap. And since you're a musician, you can also use it at mlynnapile.cz – the Anteater band studio. Have a look ;)",
     voucherHint: "",
     voucherCardTitle: "Gift voucher / Anteater record",
+    voucherRecordTab: "Anteater record",
+    voucherDonorOrder: "Donors' names will be listed in the booklet by the size of their contribution.",
+    voucherCardBandText:
+      "Want to help us make our new record? Chip in any amount and we'll immortalise your name in the booklet. Thank you, it means a lot ❤",
     voucherCardText:
       "Not sure what to give? Go for a gift voucher. And if you want to support our record and be in the booklet, write “I want the record” – once it's out, you'll get a physical copy. Donors' names will be listed in the booklet by the size of their contribution. Thank you.",
     voucherViewFront: "Cover",
@@ -725,6 +736,10 @@ export const dict: Record<Lang, Dict> = {
       "Viel Spaß mit dem Geschenk von uns – such dir ein Shirt oder eine Cap aus. Und weil du Musiker bist, kannst du es auch für mlynnapile.cz nutzen – das Studio der Band Anteater. Schau mal rein ;)",
     voucherHint: "",
     voucherCardTitle: "Geschenkgutschein / Anteater-Platte",
+    voucherRecordTab: "Anteater-Platte",
+    voucherDonorOrder: "Die Namen der Unterstützer stehen im Booklet nach Höhe des Beitrags.",
+    voucherCardBandText:
+      "Du willst unsere neue Platte unterstützen? Gib einen beliebigen Betrag und wir verewigen deinen Namen im Booklet. Danke, das bedeutet uns viel ❤",
     voucherCardText:
       "Du weißt nicht, was du schenken sollst? Nimm einen Geschenkgutschein. Und wenn du unsere Platte unterstützen und im Booklet stehen willst, schreib „ich will die Platte“ – sobald sie fertig ist, bekommst du sie physisch. Die Namen der Unterstützer stehen im Booklet nach Höhe des Beitrags. Danke.",
     voucherViewFront: "Titelseite",
