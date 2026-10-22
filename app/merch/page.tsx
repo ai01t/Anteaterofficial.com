@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
+import Credits from "../Credits"
 import HeroStage from "./HeroStage"
 import ProductCard from "./ProductCard"
 import VoucherScene from "./VoucherScene"
@@ -41,6 +42,8 @@ type Show = {
 }
 
 const CART_KEY = "anteater-merch-cart-v1"
+/** Veřejný klíč Web3Forms (je určený pro použití v prohlížeči). */
+const WEB3FORMS_KEY = "bf72ec55-0a4a-466c-b8ef-64a2256a4ae3"
 
 const formatDate = (iso: string, lang: Lang) =>
   new Date(iso).toLocaleDateString(LOCALE[lang], { day: "numeric", month: "long", year: "numeric" })
@@ -64,6 +67,7 @@ export default function MerchPage() {
   const [organizer, setOrganizer] = useState(false)
   const [follows, setFollows] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "error">("idle")
   const [form, setForm] = useState({
     name: "",
     contact: "",
@@ -303,6 +307,33 @@ export default function MerchPage() {
     ORDER_EMAIL,
   )}&su=${encodeURIComponent(t.mailSubject)}&body=${encodeURIComponent(message)}`
 
+  /** Odeslání přes Web3Forms – přijde rovnou na ORDER_EMAIL. Při chybě záloha přes poštovní program. */
+  const submitOrder = async () => {
+    if (!ready || sendState === "sending") return
+    setSendState("sending")
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: t.mailSubject,
+          from_name: form.name || "ANTEATER merch",
+          replyto: /@/.test(form.contact) ? form.contact : undefined,
+          message,
+          botcheck: "",
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data?.success === false) throw new Error("send failed")
+      setSendState("sent")
+      setCart([])
+    } catch {
+      setSendState("error")
+      window.location.href = mailto
+    }
+  }
+
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(message)
@@ -435,9 +466,21 @@ export default function MerchPage() {
 
             <div className="flex flex-1 flex-col gap-5 p-6">
               <header>
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#927C69]">Anteater</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#927C69]">
+                  {tr(coaster.description, lang)}
+                </p>
                 <h3 className="mt-2 text-2xl font-bold uppercase tracking-wide text-white">{tr(coaster.name, lang)}</h3>
-                <p className="mt-1 text-sm text-white/60">{tr(coaster.description, lang)}</p>
+                <p className="mt-1 text-sm text-white/60">
+                  {t.madeBy}{" "}
+                  <a
+                    href="https://www.laserjelinek.cz/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#927C69] hover:text-white"
+                  >
+                    Laser Jelínek
+                  </a>
+                </p>
               </header>
 
               <ul className="space-y-2 text-sm text-white/70">
@@ -855,19 +898,25 @@ export default function MerchPage() {
           </div>
         ) : null}
 
+        {sendState === "sent" ? (
+          <div className="mt-6 rounded-2xl border border-[#927C69]/60 bg-[#927C69]/10 p-6 text-sm text-white">
+            <p className="font-bold uppercase tracking-[0.15em]">{t.sentTitle}</p>
+            <p className="mt-2 text-white/70">{t.sentText}</p>
+          </div>
+        ) : null}
+        {sendState === "error" ? <p className="mt-6 text-xs text-white/60">{t.sendError}</p> : null}
+
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={ready ? mailto : undefined}
-            aria-disabled={!ready}
-            onClick={(e) => {
-              if (!ready) e.preventDefault()
-            }}
+          <button
+            type="button"
+            onClick={submitOrder}
+            disabled={!ready || sendState === "sending"}
             className={`flex-1 rounded-full px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] transition ${
               ready ? "bg-[#927C69] text-black hover:bg-white" : "cursor-not-allowed bg-white/10 text-white/35"
             }`}
           >
-            {t.send}
-          </a>
+            {sendState === "sending" ? t.sending : t.send}
+          </button>
 
           <button
             type="button"
@@ -933,6 +982,8 @@ export default function MerchPage() {
           {t.backHome}
         </Link>
       </footer>
+
+      <Credits />
 
       {/* Mobile sticky bar */}
       {itemCount > 0 ? (

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import BackgroundStage from "./BackgroundStage"
+import Credits from "./Credits"
 import ShowsSectionComponent from "./ShowsSection"
 
 export default function Home() {
@@ -487,6 +488,8 @@ UNIQUE CHARACTERISTICS:
           </div>
         </div>
       </footer>
+
+      <Credits dark={false} />
     </div>
   )
 }

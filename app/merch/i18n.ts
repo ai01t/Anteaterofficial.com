@@ -207,6 +207,11 @@ type Dict = {
   needAddress: string
   mailNote: (email: string) => string
   openInGmail: string
+  sending: string
+  sentTitle: string
+  sentText: string
+  sendError: string
+  madeBy: string
   pieces: (n: number) => string
   orderCta: string
   voucherNav: string
@@ -332,8 +337,13 @@ export const dict: Record<Lang, Dict> = {
     needDelivery: "Vyber ještě způsob doručení.",
     needAddress: "Doplň prosím adresu.",
     mailNote: (email) =>
-      `Tlačítko otevře e-mail na ${email}. Když ti nefunguje poštovní klient, zkopíruj text a pošli ho odkudkoliv.`,
+      `Objednávka nám přijde rovnou na ${email}. Když by odeslání nešlo, otevře se ti poštovní program.`,
     openInGmail: "Otevřít v Gmailu",
+    sending: "Odesílám…",
+    sentTitle: "Objednávka odeslána ✓",
+    sentText: "Díky! Ozveme se co nejdřív s potvrzením a platbou.",
+    sendError: "Odeslání se nepovedlo, otevírám poštovní program. Případně text zkopíruj a pošli na anteaterofficial@gmail.com.",
+    madeBy: "Výroba",
     pieces: (n) => `${n} ${n === 1 ? "kus" : n < 5 ? "kusy" : "kusů"}`,
     orderCta: "Objednat",
     voucherNav: "Dárkový poukaz",
@@ -462,8 +472,13 @@ export const dict: Record<Lang, Dict> = {
     needDelivery: "Pick a delivery option.",
     needAddress: "Please fill in the address.",
     mailNote: (email) =>
-      `The button opens an email to ${email}. If your mail client doesn't work, copy the text and send it from anywhere.`,
+      `The order comes straight to us at ${email}. If sending fails, your mail app will open instead.`,
     openInGmail: "Open in Gmail",
+    sending: "Sending…",
+    sentTitle: "Order sent ✓",
+    sentText: "Thanks! We'll get back to you soon with confirmation and payment details.",
+    sendError: "Sending failed, opening your mail app. You can also copy the text and send it to anteaterofficial@gmail.com.",
+    madeBy: "Made by",
     pieces: (n) => `${n} ${n === 1 ? "item" : "items"}`,
     orderCta: "Order",
     voucherNav: "Gift voucher",
@@ -592,8 +607,13 @@ export const dict: Record<Lang, Dict> = {
     needDelivery: "Wähl noch die Lieferart.",
     needAddress: "Bitte die Adresse ergänzen.",
     mailNote: (email) =>
-      `Der Button öffnet eine E-Mail an ${email}. Wenn dein Mailprogramm streikt, kopier den Text und schick ihn von wo du willst.`,
+      `Die Bestellung kommt direkt bei uns an: ${email}. Falls das Senden scheitert, öffnet sich dein Mailprogramm.`,
     openInGmail: "In Gmail öffnen",
+    sending: "Wird gesendet…",
+    sentTitle: "Bestellung gesendet ✓",
+    sentText: "Danke! Wir melden uns bald mit Bestätigung und Zahlung.",
+    sendError: "Senden fehlgeschlagen, dein Mailprogramm wird geöffnet. Du kannst den Text auch kopieren und an anteaterofficial@gmail.com schicken.",
+    madeBy: "Hergestellt von",
     pieces: (n) => `${n} ${n === 1 ? "Stück" : "Stück"}`,
     orderCta: "Bestellen",
     voucherNav: "Geschenkgutschein",
