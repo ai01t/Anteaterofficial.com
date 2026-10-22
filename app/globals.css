@@ -670,3 +670,11 @@ html {
     animation: none;
   }
 }
+
+/* poukaz na mobilu nižší */
+@media (max-width: 767px) {
+  .v-stage:not(.compact) {
+    height: 46vh;
+    min-height: 280px;
+  }
+}

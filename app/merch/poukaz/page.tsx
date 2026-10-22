@@ -133,7 +133,7 @@ export default function VoucherPage() {
           </div>
 
           {forBand ? (
-            <div className="heart-in mt-4 flex h-[min(76vh,760px)] min-h-[340px] items-center justify-center rounded-2xl bg-black">
+            <div className="heart-in mt-4 flex h-[46vh] min-h-[280px] md:h-[min(76vh,760px)] md:min-h-[340px] items-center justify-center rounded-2xl bg-black">
               <Image
                 src="/images/merch/heart.png"
                 alt="Srdce – díky za podporu desky"

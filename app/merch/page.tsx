@@ -584,7 +584,7 @@ export default function MerchPage() {
 
           {/* Dárkový poukaz */}
           <article id="poukaz" className="scroll-mt-24 flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-[#927C69]/50">
-            <div className="relative aspect-[4/5] overflow-hidden bg-black">
+            <div className="relative aspect-[5/4] overflow-hidden bg-black md:aspect-[4/5]">
               {cardBand ? (
                 <div className="heart-in absolute inset-0 flex items-center justify-center bg-black">
                   <Image
