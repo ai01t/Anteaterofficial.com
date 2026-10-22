@@ -50,6 +50,20 @@ export function saveLang(lang: Lang) {
   }
 }
 
+/** Měna podle jazyka – ceny v katalogu jsou v Kč, převod na celé jednotky. */
+export const RATE: Record<Lang, number> = { cs: 1, en: 23, de: 25 }
+export const toLocal = (czk: number, lang: Lang) => (lang === "cs" ? czk : Math.round(czk / RATE[lang]))
+export const fromLocal = (amount: number, lang: Lang) => amount * RATE[lang]
+export const CURRENCY_SIGN: Record<Lang, string> = { cs: "Kč", en: "USD", de: "EUR" }
+
+export function moneyLocal(amount: number, lang: Lang): string {
+  if (lang === "en") return `$${amount.toLocaleString("en-US")}`
+  if (lang === "de") return `${amount.toLocaleString("de-DE")} €`
+  return `${amount.toLocaleString("cs-CZ")} Kč`
+}
+
+export const money = (czk: number, lang: Lang) => moneyLocal(toLocal(czk, lang), lang)
+
 export function detectLang(): Lang {
   if (typeof navigator === "undefined") return "cs"
   const langs = navigator.languages?.length ? navigator.languages : [navigator.language]
@@ -238,6 +252,7 @@ type Dict = {
   voucherForBand: string
   voucherForBandValue: string
   voucherBandThanks: string
+  voucherBandMessage: string
   voucherCartName: string
   voucherCartNote: (to: string, from: string, msg: string) => string
   voucherCustom: string
@@ -383,6 +398,7 @@ export const dict: Record<Lang, Dict> = {
     voucherNeedAmount: "Zadej prosím částku poukazu.",
     voucherForBand: "Pro Anteater na desku",
     voucherForBandValue: "Anteater – na desku",
+    voucherBandMessage: "Zde můžete nechat kapele vzkaz",
     voucherBandThanks: "Děkujeme a moc si toho vážíme – vaše jméno proto chceme zvěčnit na booklet naší desky ❤",
     voucherCartName: "Dárkový poukaz",
     voucherCartNote: (to, from, msg) =>
@@ -431,7 +447,7 @@ export const dict: Record<Lang, Dict> = {
   en: {
     cart: "Cart",
     cartItems: (n) => `Cart, ${n} items`,
-    heroPromoLead: "Chip in 500 CZK for our new record and pick what you want in return!",
+    heroPromoLead: "Chip in $22 for our new record and pick what you want in return!",
     heroPromo:
       "We've prepared a limited promo edition of tees and caps. Everything we raise goes straight to covering the costs of our new EP. As a thank-you for your support, you take home a piece of your choice. If you just want to support the new music, get a gift voucher and swap it for your name in the record's booklet.",
     heroIntro:
@@ -535,6 +551,7 @@ export const dict: Record<Lang, Dict> = {
     voucherNeedAmount: "Please enter the voucher amount.",
     voucherForBand: "For Anteater's record",
     voucherForBandValue: "Anteater – for the record",
+    voucherBandMessage: "Leave the band a message here",
     voucherBandThanks: "Thank you, we really appreciate it – that's why we want to immortalise your name in our record's booklet ❤",
     voucherCartName: "Gift voucher",
     voucherCartNote: (to, from, msg) =>
@@ -583,7 +600,7 @@ export const dict: Record<Lang, Dict> = {
   de: {
     cart: "Warenkorb",
     cartItems: (n) => `Warenkorb, ${n} Artikel`,
-    heroPromoLead: "Gib 500 CZK für unsere neue Platte und such dir aus, was du dafür willst!",
+    heroPromoLead: "Gib 20 € für unsere neue Platte und such dir aus, was du dafür willst!",
     heroPromo:
       "Wir haben eine limitierte Promo-Edition aus Shirts und Caps vorbereitet. Alle Einnahmen fließen direkt in die Kosten unserer neuen EP. Als Dankeschön für deine Unterstützung nimmst du ein Stück deiner Wahl mit. Wenn du die neue Musik einfach nur unterstützen willst, hol dir einen Geschenkgutschein und tausche ihn gegen deinen Namen im Booklet der Platte.",
     heroIntro:
@@ -687,6 +704,7 @@ export const dict: Record<Lang, Dict> = {
     voucherNeedAmount: "Bitte gib den Gutscheinbetrag ein.",
     voucherForBand: "Für Anteaters Platte",
     voucherForBandValue: "Anteater – für die Platte",
+    voucherBandMessage: "Hier kannst du der Band eine Nachricht hinterlassen",
     voucherBandThanks: "Danke, das bedeutet uns viel – deshalb wollen wir deinen Namen im Booklet unserer Platte verewigen ❤",
     voucherCartName: "Geschenkgutschein",
     voucherCartNote: (to, from, msg) =>

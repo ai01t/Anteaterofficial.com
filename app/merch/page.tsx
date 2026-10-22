@@ -14,6 +14,9 @@ import {
   SHIP_COUNTRIES,
   countryName,
   detectCountry,
+  money,
+  moneyLocal,
+  toLocal,
   loadLang,
   saveLang,
   dict,
@@ -49,7 +52,6 @@ const WEB3FORMS_KEY = "bf72ec55-0a4a-466c-b8ef-64a2256a4ae3"
 const formatDate = (iso: string, lang: Lang) =>
   new Date(iso).toLocaleDateString(LOCALE[lang], { day: "numeric", month: "long", year: "numeric" })
 
-const formatPrice = (value: number) => `${value.toLocaleString("cs-CZ")} Kč`
 
 export default function MerchPage() {
   const [lang, setLang] = useState<Lang>("cs")
@@ -174,6 +176,8 @@ export default function MerchPage() {
     setCart((prev) => (qty <= 0 ? prev.filter((i) => i.key !== key) : prev.map((i) => (i.key === key ? { ...i, qty } : i))))
 
   const t = dict[lang]
+  /** Cena v Kč → měna podle jazyka. */
+  const formatPrice = (czk: number) => money(czk, lang)
   const itemCount = cart.reduce((sum, i) => sum + i.qty, 0)
   const tees = cart.filter((i) => i.countsAs === "tee").reduce((sum, i) => sum + i.qty, 0)
   const caps = cart.filter((i) => i.countsAs === "cap").reduce((sum, i) => sum + i.qty, 0)
@@ -212,6 +216,9 @@ export default function MerchPage() {
   const suggestedZone = homeCountry === "CZ" ? "cz" : homeCountry === "DE" ? "de" : homeCountry ? "eu" : null
   const shipping = delivery === "ship" ? zone.price : 0
   const total = subtotal + shipping
+  /** Součty v zobrazované měně – sčítáme už zaokrouhlené položky, ať sedí. */
+  const localSubtotal = cart.reduce((sum, i) => sum + toLocal(i.price ?? 0, lang) * i.qty, 0)
+  const localTotal = localSubtotal + (delivery === "ship" ? toLocal(zone.price, lang) : 0)
 
   const selectedShow = shows.find((s) => s.id === showId)
 
@@ -253,7 +260,7 @@ export default function MerchPage() {
     if (organizer) lines.push(t.msgOrganizer)
     if (coastersFree && !organizer) lines.push(t.msgFollows)
     if (form.note) lines.push(`${t.msgNote}: ${form.note}`)
-    if (!hasUnpriced) lines.push(`${t.msgTotal}: ${formatPrice(total)}`)
+    if (!hasUnpriced) lines.push(`${t.msgTotal}: ${moneyLocal(localTotal, lang)}`)
     lines.push("", t.msgThanks)
 
     return lines.join("\n")
@@ -627,7 +634,7 @@ export default function MerchPage() {
                   </div>
                   <div className="flex items-center gap-4">
                     {i.price !== null ? (
-                      <span className="hidden text-sm text-white/60 sm:block">{formatPrice(i.price * i.qty)}</span>
+                      <span className="hidden text-sm text-white/60 sm:block">{moneyLocal(toLocal(i.price, lang) * i.qty, lang)}</span>
                     ) : null}
                     <div className="flex items-center rounded-full border border-white/20">
                       <button
@@ -749,7 +756,7 @@ export default function MerchPage() {
               {t.ship} <span className="text-[#927C69]">{t.shipFrom(formatPrice(cheapestShipping))}</span>
             </p>
             <p className="mt-2 text-xs text-white/55">
-              {zones.map((z) => `${tr(z.label, lang)} ${z.price} Kč`).join(" · ")}
+              {zones.map((z) => `${tr(z.label, lang)} ${formatPrice(z.price)}`).join(" · ")}
             </p>
           </button>
         </div>
@@ -852,7 +859,7 @@ export default function MerchPage() {
                         : "border-white/20 text-white/70 hover:border-white/50 hover:text-white"
                     } ${suggestedZone === z.id ? "font-extrabold ring-1 ring-[#927C69]/70" : "font-semibold"}`}
                   >
-                    {tr(z.label, lang)} <span className="font-normal">{z.price} Kč</span>
+                    {tr(z.label, lang)} <span className="font-normal">{formatPrice(z.price)}</span>
                   </button>
                 ))}
               </div>
@@ -917,7 +924,7 @@ export default function MerchPage() {
         <div className="mt-6 rounded-2xl border border-[#927C69]/40 bg-[#927C69]/[0.07] p-6">
           <div className="flex items-center justify-between text-sm text-white/70">
             <span>{t.goods}</span>
-            <span>{hasUnpriced ? "—" : formatPrice(subtotal)}</span>
+            <span>{hasUnpriced ? "—" : moneyLocal(localSubtotal, lang)}</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-sm text-white/70">
             <span>{t.deliveryRow}</span>
@@ -931,7 +938,7 @@ export default function MerchPage() {
           ) : null}
           <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 text-xl font-bold">
             <span className="uppercase tracking-wide">{t.totalRow}</span>
-            <span>{hasUnpriced ? t.onRequest : formatPrice(total)}</span>
+            <span>{hasUnpriced ? t.onRequest : moneyLocal(localTotal, lang)}</span>
           </div>
         </div>
 
@@ -1038,7 +1045,7 @@ export default function MerchPage() {
             className="flex items-center justify-between rounded-full bg-[#927C69] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-black"
           >
             <span>{t.pieces(itemCount)}</span>
-            <span>{hasUnpriced ? t.orderCta : `${formatPrice(total)} →`}</span>
+            <span>{hasUnpriced ? t.orderCta : `${moneyLocal(localTotal, lang)} →`}</span>
           </a>
         </div>
       ) : null}

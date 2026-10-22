@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Product } from "./data";
-import { cardDict, tr, type Lang } from "./i18n";
+import { cardDict, money, tr, type Lang } from "./i18n";
 
 type Props = {
   product: Product;
@@ -223,12 +223,11 @@ export default function ProductCard({ product, lang, inCart, onAdd }: Props) {
             {product.price !== null ? (
               <p className="flex items-baseline gap-2">
                 <span className="text-xl font-bold text-white">
-                  {product.price.toLocaleString("cs-CZ")}{" "}
-                  <span className="text-sm font-normal text-white/50">Kč</span>
+                  {money(product.price, lang)}
                 </span>
                 {product.compareAtPrice ? (
                   <span className="text-sm text-white/35 line-through">
-                    {product.compareAtPrice.toLocaleString("cs-CZ")} Kč
+                    {money(product.compareAtPrice, lang)}
                   </span>
                 ) : null}
               </p>

@@ -10,7 +10,10 @@ import VoucherScene, {
   type View,
   type VoucherHandle,
 } from "../VoucherScene"
-import { LANGS, dict, loadLang, saveLang, type Lang } from "../i18n"
+import { CURRENCY_SIGN, LANGS, dict, fromLocal, loadLang, moneyLocal, saveLang, type Lang } from "../i18n"
+
+/** Výchozí hodnota poukazu v měně jazyka. */
+const VOUCHER_DEFAULT: Record<Lang, number> = { cs: 1000, en: 45, de: 40 }
 
 export default function VoucherPage() {
   const [lang, setLang] = useState<Lang>("cs")
@@ -20,7 +23,7 @@ export default function VoucherPage() {
   const [fields, setFields] = useState({ to: "", from: "", message: "" })
   const [amountMode, setAmountMode] = useState<"1000" | "custom">("1000")
   const [customAmount, setCustomAmount] = useState("")
-  const amount = amountMode === "1000" ? 1000 : Number(customAmount.replace(/\D/g, "")) || undefined
+  const amount = amountMode === "1000" ? VOUCHER_DEFAULT[lang] : Number(customAmount.replace(/\D/g, "")) || undefined
   const voucherFields = { ...fields, amount }
   const router = useRouter()
   const [cartState, setCartState] = useState<"idle" | "added" | "need-amount">("idle")
@@ -36,10 +39,10 @@ export default function VoucherPage() {
     const item = {
       key: `voucher|${amount}|${Date.now()}`,
       productId: "voucher",
-      name: `${t.voucherCartName} ${amount.toLocaleString("cs-CZ")} Kč`,
+      name: `${t.voucherCartName} ${moneyLocal(amount, lang)}`,
       size: "Univerzální",
       qty: 1,
-      price: amount,
+      price: fromLocal(amount, lang),
       countsAs: "voucher",
       note,
     }
@@ -148,7 +151,7 @@ export default function VoucherPage() {
               <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">{t.voucherAmount}</p>
               <div className="flex flex-wrap items-center gap-2">
                 <Pill active={amountMode === "1000"} onClick={() => setAmountMode("1000")}>
-                  1 000 Kč
+                  {moneyLocal(VOUCHER_DEFAULT[lang], lang)}
                 </Pill>
                 <Pill active={amountMode === "custom"} onClick={() => setAmountMode("custom")}>
                   {t.voucherCustom}
@@ -164,13 +167,13 @@ export default function VoucherPage() {
                       autoFocus
                       className="w-32 rounded-full border border-white/15 bg-black/40 px-4 py-2 text-sm text-white outline-none focus:border-[#927C69]"
                     />
-                    <span className="text-sm text-white/60">Kč</span>
+                    <span className="text-sm text-white/60">{CURRENCY_SIGN[lang]}</span>
                   </label>
                 ) : null}
               </div>
             </div>
 
-            <div>
+            <div className="flex items-end gap-2 sm:col-span-2">
               <VField
                 label={t.voucherFor}
                 placeholder={t.voucherForPh}
@@ -179,32 +182,35 @@ export default function VoucherPage() {
                   setForBand(false)
                   setFields((f) => ({ ...f, to: v }))
                 }}
+                className="flex-1"
               />
               <button
                 type="button"
                 onClick={() => {
-                  setForBand(true)
-                  setFields((f) => ({ ...f, to: t.voucherForBandValue }))
+                  const on = !forBand
+                  setForBand(on)
+                  setFields((f) => ({ ...f, to: on ? t.voucherForBandValue : "" }))
                 }}
                 aria-pressed={forBand}
-                className={`mt-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold transition ${
+                className={`shrink-0 rounded-xl border px-4 py-3 text-xs font-semibold transition ${
                   forBand
                     ? "border-[#927C69] bg-[#927C69] text-black"
-                    : "border-white/20 text-white/60 hover:border-[#927C69] hover:text-white"
+                    : "border-white/20 text-white/70 hover:border-[#927C69] hover:text-white"
                 }`}
               >
                 {t.voucherForBand} ❤
               </button>
             </div>
             <VField
+              className="sm:col-span-2"
               label={t.voucherFrom}
               placeholder={t.voucherFromPh}
               value={fields.from}
               onChange={(v) => setFields((f) => ({ ...f, from: v }))}
             />
             <VArea
-              label={t.voucherMessage}
-              placeholder={t.voucherMessagePh}
+              label={forBand ? t.voucherBandMessage : t.voucherMessage}
+              placeholder={forBand ? t.voucherBandMessage : t.voucherMessagePh}
               value={fields.message}
               onChange={(v) => setFields((f) => ({ ...f, message: v }))}
               className="sm:col-span-2"

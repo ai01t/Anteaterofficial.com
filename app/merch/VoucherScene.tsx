@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from "react"
-import { dict, type Lang } from "./i18n"
+import { dict, moneyLocal, type Lang } from "./i18n"
 
 export type LogoVariant = "new" | "legacy"
 export type Theme = "dark" | "light"
@@ -219,7 +219,7 @@ const VoucherScene = forwardRef<VoucherHandle, Props>(function VoucherScene(
             <div ref={frontLeaf} className="v-leaf">
               <div className="v-face front" style={panelStyle}>
                 <div ref={shade1} className="v-shade" />
-                <CoverPanel t={t} logo={logo} dark={dark} amount={fields.amount} />
+                <CoverPanel t={t} logo={logo} dark={dark} amount={fields.amount} lang={lang} />
               </div>
               <div className="v-face inside" style={panelStyle}>
                 <div className="v-crease" />
@@ -263,7 +263,7 @@ export function VoucherPrintSheets({
           <BackPanel t={t} fields={fields} logo={logo} dark={dark} soft={soft} line={line} />
         </div>
         <div className="v-slot bottom">
-          <CoverPanel t={t} logo={logo} dark={dark} amount={fields.amount} />
+          <CoverPanel t={t} logo={logo} dark={dark} amount={fields.amount} lang={lang} />
         </div>
       </div>
       <div className="v-sheet" style={panelStyle}>
@@ -285,7 +285,19 @@ export function VoucherPrintSheets({
 type T = (typeof dict)["cs"]
 type Fields = VoucherFields
 
-function CoverPanel({ t, logo, dark, amount }: { t: T; logo: LogoVariant; dark: boolean; amount?: number }) {
+function CoverPanel({
+  t,
+  logo,
+  dark,
+  amount,
+  lang,
+}: {
+  t: T
+  logo: LogoVariant
+  dark: boolean
+  amount?: number
+  lang: Lang
+}) {
   return (
     <div className="v-panel" style={{ alignItems: "center", justifyContent: "center", gap: "8mm" }}>
       <Logo variant={logo} dark={dark} width={logo === "legacy" ? "78mm" : "52mm"} stacked />
@@ -294,7 +306,7 @@ function CoverPanel({ t, logo, dark, amount }: { t: T; logo: LogoVariant; dark: 
       </span>
       {amount ? (
         <span style={{ fontSize: "18pt", fontWeight: 700, letterSpacing: "0.04em" }}>
-          {amount.toLocaleString("cs-CZ")} Kč
+          {moneyLocal(amount, lang)}
         </span>
       ) : null}
 
