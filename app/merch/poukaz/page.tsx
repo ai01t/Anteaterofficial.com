@@ -173,7 +173,7 @@ export default function VoucherPage() {
               </div>
             </div>
 
-            <div className="flex items-end gap-2 sm:col-span-2">
+            <div className="grid grid-cols-2 items-end gap-3 sm:col-span-2">
               <VField
                 label={t.voucherFor}
                 placeholder={t.voucherForPh}
@@ -182,7 +182,6 @@ export default function VoucherPage() {
                   setForBand(false)
                   setFields((f) => ({ ...f, to: v }))
                 }}
-                className="flex-1"
               />
               <button
                 type="button"
@@ -192,10 +191,10 @@ export default function VoucherPage() {
                   setFields((f) => ({ ...f, to: on ? t.voucherForBandValue : "" }))
                 }}
                 aria-pressed={forBand}
-                className={`shrink-0 rounded-xl border px-4 py-3 text-xs font-semibold transition ${
+                className={`w-full rounded-xl border px-4 py-3 text-sm font-semibold transition ${
                   forBand
-                    ? "border-[#927C69] bg-[#927C69] text-black"
-                    : "border-white/20 text-white/70 hover:border-[#927C69] hover:text-white"
+                    ? "border-[#927C69] bg-[#927C69] text-black shadow-[0_8px_24px_-10px_rgba(146,124,105,0.9)]"
+                    : "border-white/15 bg-black/40 text-white/70 hover:border-[#927C69] hover:text-white"
                 }`}
               >
                 {t.voucherForBand} ❤
