@@ -154,11 +154,19 @@ UNIQUE CHARACTERISTICS:
               { href: "#booking", label: "Booking" },
               { href: "#press", label: "Press" },
               { href: "#members", label: "Members" },
+              { href: "/merch", label: "Merch", badge: "New" },
             ].map((item) => (
-              <li key={item.href}>
+              <li key={item.href} className="relative">
                 <a href={item.href} className="hover:opacity-60 transition">
                   {item.label}
                 </a>
+                {item.badge ? (
+                  <span className="pointer-events-none absolute -bottom-3 left-0 right-0 text-center">
+                    <span className="new-flag inline-block text-[9px] font-extrabold uppercase tracking-[0.1em] text-[#927C69]">
+                      {item.badge}
+                    </span>
+                  </span>
+                ) : null}
               </li>
             ))}
           </ul>
