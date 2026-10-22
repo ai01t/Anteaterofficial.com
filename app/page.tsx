@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import BackgroundStage from "./BackgroundStage"
-import Credits from "./Credits"
 import ShowsSectionComponent from "./ShowsSection"
 
 export default function Home() {
@@ -236,7 +235,7 @@ UNIQUE CHARACTERISTICS:
         </div>
       </header>
 
-      <main className="relative pt-20 pb-20 px-6">
+      <main className="relative pt-[136px] sm:pt-24 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Hero Section - ANTEATER Title */}
           <div className="text-center mb-32">
@@ -488,8 +487,6 @@ UNIQUE CHARACTERISTICS:
           </div>
         </div>
       </footer>
-
-      <Credits dark={false} />
     </div>
   )
 }

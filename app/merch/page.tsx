@@ -3,7 +3,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
-import Credits from "../Credits"
 import HeroStage from "./HeroStage"
 import ProductCard from "./ProductCard"
 import VoucherScene from "./VoucherScene"
@@ -982,8 +981,6 @@ export default function MerchPage() {
           {t.backHome}
         </Link>
       </footer>
-
-      <Credits />
 
       {/* Mobile sticky bar */}
       {itemCount > 0 ? (
