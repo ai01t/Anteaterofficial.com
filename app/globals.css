@@ -631,3 +631,42 @@ html {
     transform: none;
   }
 }
+
+/* srdce místo poukazu – „Pro Anteater na desku" */
+.heart-in {
+  animation: heart-in 600ms ease-out both;
+}
+.heart-beat {
+  animation: heart-beat 1.8s ease-in-out 0.6s infinite;
+}
+@keyframes heart-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes heart-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.06);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.04);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heart-in,
+  .heart-beat {
+    animation: none;
+  }
+}
