@@ -202,7 +202,7 @@ export const products: Product[] = [  {
     cartName: { cs: "Kšiltovka ANTEATER", en: "ANTEATER cap", de: "ANTEATER Cap" },
     line: "Legacy",
     tagline: "",
-    price: 550,
+    price: 500,
     images: [
       { src: "/images/merch/cap.jpg", alt: "Černá kšiltovka ANTEATER na hlavě", position: "92% 50%" },
       { src: "/images/merch/cap-front.jpg", alt: "Černá kšiltovka ANTEATER – přední panel s logem" },
@@ -244,7 +244,7 @@ export const products: Product[] = [  {
     name: { cs: "Kšiltovka pro děti", en: "Kids Cap", de: "Kinder-Cap" },
     cartName: { cs: "Kšiltovka pro děti", en: "Kids cap", de: "Kinder-Cap" },
     line: "Legacy",
-    tagline: { cs: "Momentálně vyprodáno", en: "Currently sold out", de: "Derzeit ausverkauft" },
+    tagline: { cs: "Rozdáno 🙂", en: "All given away 🙂", de: "Alle verschenkt 🙂" },
     price: null,
     soldOut: true,
     images: [{ src: "/images/merch/cap-kids.jpg", alt: "Dětská kšiltovka ANTEATER" }],

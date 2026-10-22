@@ -616,3 +616,18 @@ html {
     display: block;
   }
 }
+
+/* přepnutí textu v hero na merchi */
+.hero-text-in {
+  animation: hero-text-in 450ms ease-out both;
+}
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

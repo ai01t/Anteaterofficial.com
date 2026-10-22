@@ -66,6 +66,7 @@ export default function MerchPage() {
   const [organizer, setOrganizer] = useState(false)
   const [follows, setFollows] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [heroText, setHeroText] = useState(0)
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "error">("idle")
   const [form, setForm] = useState({
     name: "",
@@ -418,7 +419,36 @@ export default function MerchPage() {
           <div className="relative mx-auto w-full max-w-6xl px-6 py-16 md:px-10 md:py-24">
             <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#927C69]">Anteater official</p>
             <h1 className="mt-4 text-5xl font-bold uppercase leading-[0.95] tracking-tight md:text-8xl">Merch</h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75">{t.heroIntro}</p>
+            <div className="mt-6 flex max-w-xl items-start gap-4">
+              <p key={heroText} className="hero-text-in min-h-[7.5rem] flex-1 text-base leading-relaxed text-white/75">
+                {heroText === 0 ? (
+                  <>
+                    <span className="mb-2 block font-semibold text-white">{t.heroPromoLead}</span>
+                    {t.heroPromo}
+                  </>
+                ) : (
+                  t.heroIntro
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={() => setHeroText((v) => (v + 1) % 2)}
+                aria-label={heroText === 0 ? "Další text" : "Předchozí text"}
+                className="mt-1 shrink-0 rounded-full border border-white/20 p-2.5 text-white/60 transition hover:border-[#927C69] hover:text-white"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  className={`transition-transform ${heroText === 1 ? "rotate-180" : ""}`}
+                >
+                  <path d="m9 5 7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>

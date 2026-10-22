@@ -139,6 +139,8 @@ type Dict = {
   cart: string
   cartItems: (n: number) => string
   heroIntro: string
+  heroPromo: string
+  heroPromoLead: string
   collection: string
   gallery: string
   order: string
@@ -266,6 +268,9 @@ export const dict: Record<Lang, Dict> = {
   cs: {
     cart: "Košík",
     cartItems: (n) => `Košík, ${n} položek`,
+    heroPromoLead: "Přispěj 500,- Kč na novou desku a vyber si, co za to chceš!",
+    heroPromo:
+      "Máme připravenou limitovanou promo edici triček a kšiltovek. Veškeré vybrané prostředky jdou přímo na pokrytí nákladů na naše nové EP. Jako poděkování za podporu si odneseš kousek podle vlastního výběru. Pokud chceš novou tvorbu jen podpořit, můžeš si pořídit dárkový poukaz a vyměnit ho za své jméno na bookletu desky.",
     heroIntro:
       "Vše můžete vyzvednout na koncertě, přijďte za námi, vše budeme mít s sebou. A chcete-li si něco zarezervovat, neváhejte nám napsat nebo si to naklikejte zde na stránce. ;)",
     collection: "Kolekce",
@@ -401,6 +406,9 @@ export const dict: Record<Lang, Dict> = {
   en: {
     cart: "Cart",
     cartItems: (n) => `Cart, ${n} items`,
+    heroPromoLead: "Chip in 500 CZK for our new record and pick what you want in return!",
+    heroPromo:
+      "We've prepared a limited promo edition of tees and caps. Everything we raise goes straight to covering the costs of our new EP. As a thank-you for your support, you take home a piece of your choice. If you just want to support the new music, get a gift voucher and swap it for your name in the record's booklet.",
     heroIntro:
       "You can pick everything up at a show — just come find us, we always bring the merch along. And if you want to reserve something, drop us a line or put it together right here. ;)",
     collection: "Collection",
@@ -536,6 +544,9 @@ export const dict: Record<Lang, Dict> = {
   de: {
     cart: "Warenkorb",
     cartItems: (n) => `Warenkorb, ${n} Artikel`,
+    heroPromoLead: "Gib 500 CZK für unsere neue Platte und such dir aus, was du dafür willst!",
+    heroPromo:
+      "Wir haben eine limitierte Promo-Edition aus Shirts und Caps vorbereitet. Alle Einnahmen fließen direkt in die Kosten unserer neuen EP. Als Dankeschön für deine Unterstützung nimmst du ein Stück deiner Wahl mit. Wenn du die neue Musik einfach nur unterstützen willst, hol dir einen Geschenkgutschein und tausche ihn gegen deinen Namen im Booklet der Platte.",
     heroIntro:
       "Alles könnt ihr beim Konzert abholen – kommt einfach zu uns, wir haben den Merch immer dabei. Und wenn ihr etwas reservieren wollt, schreibt uns oder stellt es euch gleich hier zusammen. ;)",
     collection: "Kollektion",
@@ -674,7 +685,7 @@ export const cardDict: Record<Lang, Record<string, string>> = {
   cs: {
     photo: "Zobrazit fotku",
     inCart: "× v košíku",
-    soldOut: "Vyprodáno",
+    soldOut: "Rozdáno 🙂",
     detail: "Detail",
     makerSpec: "Specifikace výrobce →",
     priceOnRequest: "Cena na dotaz",
@@ -687,7 +698,7 @@ export const cardDict: Record<Lang, Record<string, string>> = {
   en: {
     photo: "Show photo",
     inCart: "× in cart",
-    soldOut: "Sold out",
+    soldOut: "All given away 🙂",
     detail: "Details",
     makerSpec: "Manufacturer spec →",
     priceOnRequest: "Price on request",
@@ -700,7 +711,7 @@ export const cardDict: Record<Lang, Record<string, string>> = {
   de: {
     photo: "Foto zeigen",
     inCart: "× im Warenkorb",
-    soldOut: "Ausverkauft",
+    soldOut: "Alle verschenkt 🙂",
     detail: "Details",
     makerSpec: "Herstellerangaben →",
     priceOnRequest: "Preis auf Anfrage",
