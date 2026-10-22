@@ -233,6 +233,7 @@ type Dict = {
   voucherNav: string
   voucherTitle: string
   voucherKicker: string
+  voucherKickerBand: string
   voucherOpen: string
   voucherClose: string
   voucherText: string
@@ -380,6 +381,7 @@ export const dict: Record<Lang, Dict> = {
     voucherNav: "Dárkový poukaz",
     voucherTitle: "Dárkový poukaz",
     voucherKicker: "Dárek od kapely",
+    voucherKickerBand: "Dárek pro kapelu Anteater",
     voucherOpen: "Otevřít",
     voucherClose: "Zavřít",
     voucherText:
@@ -533,6 +535,7 @@ export const dict: Record<Lang, Dict> = {
     voucherNav: "Gift voucher",
     voucherTitle: "Gift voucher",
     voucherKicker: "A gift from the band",
+    voucherKickerBand: "A gift for Anteater",
     voucherOpen: "Open",
     voucherClose: "Close",
     voucherText:
@@ -686,6 +689,7 @@ export const dict: Record<Lang, Dict> = {
     voucherNav: "Geschenkgutschein",
     voucherTitle: "Geschenkgutschein",
     voucherKicker: "Ein Geschenk von der Band",
+    voucherKickerBand: "Ein Geschenk für Anteater",
     voucherOpen: "Öffnen",
     voucherClose: "Schließen",
     voucherText:
