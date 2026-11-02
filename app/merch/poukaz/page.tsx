@@ -77,7 +77,7 @@ export default function VoucherPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#0B0A09] text-white">
+    <div className="min-h-screen w-full overflow-x-clip bg-[#0B0A09] text-white">
       <div className="v-screen">
         <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0B0A09]/85 backdrop-blur">
           <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
@@ -108,21 +108,21 @@ export default function VoucherPage() {
           </div>
         </header>
 
-        <main className="mx-auto max-w-5xl px-6 py-14">
+        <main className="mx-auto max-w-5xl px-4 py-10 text-center sm:px-6 sm:py-14 sm:text-left">
           <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#927C69]">
             {forBand ? t.voucherKickerBand : t.voucherKicker}
           </p>
-          <h1 className="mt-3 text-4xl font-bold uppercase tracking-tight md:text-6xl">{t.voucherTitle}</h1>
+          <h1 className="mt-3 text-3xl font-bold uppercase tracking-tight sm:text-4xl md:text-6xl">{t.voucherTitle}</h1>
 
-          <div className={`mt-8 flex items-center justify-between gap-4 ${forBand ? "invisible" : ""}`}>
-            <div className="inline-flex gap-1 rounded-full border border-white/15 p-1">
+          <div className={`mt-6 flex items-center justify-center gap-4 sm:mt-8 sm:justify-between ${forBand ? "invisible" : ""}`}>
+            <div className="mx-auto inline-flex gap-1 rounded-full border border-white/15 p-1 sm:mx-0">
               {views.map((v) => (
                 <button
                   key={v.id}
                   type="button"
                   onClick={() => sceneRef.current?.goTo(v.id)}
                   aria-pressed={view === v.id}
-                  className={`rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] transition ${
+                  className={`rounded-full px-3 py-2 text-[9px] font-bold uppercase tracking-[0.1em] transition sm:px-4 sm:text-[10px] sm:tracking-[0.14em] ${
                     view === v.id ? "bg-[#927C69]/20 text-[#927C69]" : "text-white/40 hover:text-white/80"
                   }`}
                 >
@@ -155,7 +155,7 @@ export default function VoucherPage() {
           )}
 
           {/* ovládání */}
-          <div className="mt-8 grid gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:grid-cols-2">
+          <div className="mt-8 grid gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left sm:grid-cols-2 sm:p-6">
             {forBand ? (
               <p className="heart-in rounded-2xl border border-[#927C69]/50 bg-[#927C69]/10 p-5 text-base leading-relaxed text-white sm:col-span-2">
                 {t.voucherBandThanks}

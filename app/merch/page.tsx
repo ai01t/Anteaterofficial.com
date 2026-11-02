@@ -358,7 +358,7 @@ export default function MerchPage() {
   const ready = cart.length > 0 && delivery !== null && (delivery === "pickup" || (form.street && form.city && form.zip))
 
   return (
-    <div className="min-h-screen bg-[#0B0A09] text-white">
+    <div className="min-h-screen overflow-x-clip bg-[#0B0A09] text-white">
       {/* Top bar */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0B0A09]/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">

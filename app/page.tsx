@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react"
 import BackgroundStage from "./BackgroundStage"
+import HiddenCredits from "./HiddenCredits"
 import ShowsSectionComponent from "./ShowsSection"
+import TopNav from "./TopNav"
 
 export default function Home() {
   const [events, setEvents] = useState<any[]>([])
@@ -144,33 +146,10 @@ UNIQUE CHARACTERISTICS:
       </div>
 
       <BackgroundStage />
+      <HiddenCredits />
 
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <nav className="max-w-7xl mx-auto mb-3">
-          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs sm:text-sm font-semibold text-black uppercase tracking-wider">
-            {[
-              { href: "#shows", label: "Shows" },
-              { href: "#about", label: "About" },
-              { href: "#booking", label: "Booking" },
-              { href: "#press", label: "Press" },
-              { href: "#members", label: "Members" },
-              { href: "/merch", label: "Merch", badge: "New" },
-            ].map((item) => (
-              <li key={item.href} className="relative">
-                <a href={item.href} className="hover:opacity-60 transition">
-                  {item.label}
-                </a>
-                {item.badge ? (
-                  <span className="pointer-events-none absolute -bottom-3 left-0 right-0 text-center">
-                    <span className="new-flag inline-block text-[9px] font-extrabold uppercase tracking-[0.1em] text-[#927C69]">
-                      {item.badge}
-                    </span>
-                  </span>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <TopNav />
         <div className="max-w-7xl mx-auto flex justify-center gap-6">
           <a
             href="https://www.instagram.com/anteaterofficial/"
@@ -235,7 +214,7 @@ UNIQUE CHARACTERISTICS:
         </div>
       </header>
 
-      <main className="relative pt-[136px] sm:pt-24 pb-20 px-6">
+      <main className="relative pt-[100px] sm:pt-24 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Hero Section - ANTEATER Title */}
           <div className="text-center mb-32">
@@ -403,7 +382,7 @@ UNIQUE CHARACTERISTICS:
                     <div>
                       <p className="font-semibold mb-3">Stage Plan</p>
                       <a
-                        href="https://drive.google.com/file/d/13AKrl4Nn6mruu-mJULVZ0an9cUEGmrDE/view?usp=sharing"
+                        href="https://drive.google.com/file/d/1XHGwpQ5bxgYjPrijUzzyPZtdT177GuwY/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:opacity-60 transition inline-flex items-center gap-2"
@@ -441,9 +420,9 @@ UNIQUE CHARACTERISTICS:
         </div>
       </main>
 
-      <footer className="relative py-16 px-6 bg-black/90 mt-20">
+      <footer className="relative py-16 px-6 bg-black mt-20">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="flex flex-wrap justify-center gap-8 text-base font-semibold text-white uppercase tracking-wider">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-8 text-sm sm:text-base font-semibold text-white uppercase tracking-wider">
             <a
               href="https://www.instagram.com/anteaterofficial/"
               target="_blank"
